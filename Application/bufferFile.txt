@@ -1,0 +1,8 @@
+Running D:\GetTech\Sikuli-Get-Tech\FlairTestBed\ZZZFlairCloseApp.sikuli
++++ running this Java
++++ trying to run SikuliX
++++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\Sikuli-Get-Tech\Sikuli Build\sikulix.jar -r "D:\GetTech\Sikuli-Get-Tech\FlairTestBed\ZZZFlairCloseApp.sikuli"
+[debug] TEST PASSED!!
+++++++++++++++++++++++++++++++++ 
+
+ 

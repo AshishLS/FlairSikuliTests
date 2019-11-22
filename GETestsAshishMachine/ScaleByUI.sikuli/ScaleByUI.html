@@ -1,0 +1,170 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>ScaleByUI.sikuli</h2> <a href="ScaleByUI.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> os
+<span class="kw">import</span> sys
+<span class="kw">import</span> module_CreateProject
+<span class="kw">import</span> module_DeleteProject
+<span class="kw">import</span> module_CreatePolygonInTexas
+<span class="kw">import</span> module_CommonImagesSet
+<span class="kw">import</span> module_PublishDrawing
+
+nameOfProject = <span class="str">"Test Scale By UI"</span>
+<span class="kw">if</span>(<span class="dig">1</span>):
+    <span class="cmt"># First delete existing project if any.
+</span>    module_DeleteProject.deleteProject(nameOfProject)
+    <span class="cmt"># Create new project.
+</span>    module_CreateProject.createProject(nameOfProject)
+
+    <span class="cmt"># Create a polygon.
+</span>    module_CreatePolygonInTexas.createPolygonInTexas()
+
+    <span class="cmt"># Polygon is done. Go to Forge.
+</span>    module_CommonImagesSet.clickOnMapModelSlider()
+    <span class="skw">wait</span>(<span class="dig">5</span>)
+
+    module_CommonImagesSet.fitToView()
+
+<span class="cmt">#confirm
+</span><span class="kw">if</span> <span class="kw">not</span> exists(Pattern(<img src="twoTMsSideBySide.png" />).similar(<span class="dig">0.35</span>)):
+    Debug.log(<span class="str">"Something went wrong in Forge View"</span>)
+    module_DeleteProject.deleteProject(nameOfProject)
+<span class="cmt"># Test SACLING BY UI.
+</span>
+<span class="cmt"># First move three road blocks to North.
+</span>truckLocation = <span class="skw">find</span>(module_CommonImagesSet.unloadingTruckImg)
+keyDown(Key.CTRL)
+<span class="skw">click</span>(truckLocation.getTarget().offset(-<span class="dig">425</span>,<span class="dig">26</span>)) <span class="cmt">#left road arc</span>
+<span class="skw">click</span>(truckLocation.getTarget().offset(<span class="dig">0</span>,-<span class="dig">26</span>)) <span class="cmt">#road above</span>
+<span class="skw">click</span>(truckLocation.getTarget().offset(<span class="dig">367</span>,<span class="dig">31</span>)) <span class="cmt">#right road arc</span>
+keyUp(Key.CTRL)
+
+transformPartitionLocation = <span class="skw">find</span>(module_CommonImagesSet.transformPartition)
+<span class="skw">click</span>(transformPartitionLocation.getTarget().offset(<span class="dig">0</span>,<span class="dig">0</span>)) <span class="cmt">#open the transforms.</span>
+<span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="skw">click</span>(transformPartitionLocation.getTarget().offset(-<span class="dig">22</span>,<span class="dig">82</span>)) <span class="cmt">#transform by edit</span>
+
+module_CommonImagesSet.removePreExistingText()
+<span class="skw">type</span>(<span class="str">"20.5"</span>) <span class="cmt"># moving by 15.5 meters to north</span>
+<span class="skw">click</span>(transformPartitionLocation.getTarget().offset(<span class="dig">33</span>,<span class="dig">132</span>)) <span class="cmt">#NORTH BUTTON</span>
+
+<span class="skw">click</span>(truckLocation.offset(<span class="dig">0</span>,-<span class="dig">50</span>)) <span class="cmt"># Blank Space on canvas.</span>
+<span class="skw">type</span>(Key.ESC)
+
+<span class="cmt"># Now scale with UI
+</span>gsutImg = Pattern(<img src="gsutImg.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+keyDown(Key.CTRL)
+<span class="skw">click</span>(gsutImg.targetOffset(-<span class="dig">78</span>,<span class="dig">0</span>)) <span class="cmt"># select left road.</span>
+<span class="skw">click</span>(gsutImg.targetOffset(<span class="dig">749</span>,<span class="dig">0</span>)) <span class="cmt"># select right road.</span>
+keyUp(Key.CTRL)
+
+<span class="skw">click</span>(module_CommonImagesSet.scaleByDistance.targetOffset(-<span class="dig">13</span>,<span class="dig">80</span>))<span class="cmt"># Click on the Scale by distance vertical.</span>
+module_CommonImagesSet.removePreExistingText()
+<span class="skw">type</span>(<span class="str">"20.5"</span>) <span class="cmt"># scaling by 15.5 meters to north</span>
+<span class="skw">click</span>(module_CommonImagesSet.applyScaleButton.targetOffset(<span class="dig">0</span>,<span class="dig">0</span>)) <span class="cmt"># Apply scale button.</span>
+
+<span class="cmt"># Adjust the scaled blocks by moving up by half the distance.
+</span><span class="skw">click</span>(transformPartitionLocation.getTarget().offset(-<span class="dig">22</span>,<span class="dig">82</span>)) <span class="cmt">#transform by edit</span>
+module_CommonImagesSet.removePreExistingText()
+<span class="skw">type</span>(<span class="str">"20.5 / 2"</span>) <span class="cmt"># moving by 15.5 meters to north</span>
+<span class="skw">click</span>(transformPartitionLocation.getTarget().offset(<span class="dig">33</span>,<span class="dig">132</span>)) <span class="cmt">#NORTH BUTTON</span>
+
+<span class="skw">click</span>(truckLocation.getTarget().offset(<span class="dig">0</span>,-<span class="dig">50</span>)) <span class="cmt"># Blank Space on canvas.</span>
+<span class="skw">type</span>(Key.ESC)
+<span class="skw">click</span>(transformPartitionLocation.getTarget().offset(<span class="dig">0</span>,<span class="dig">0</span>)) <span class="cmt">#close the transforms.</span>
+
+module_CommonImagesSet.fitToView()
+
+<span class="cmt">#validate
+</span><span class="kw">if</span> <span class="kw">not</span> exists(<img src="finalResultImage.png" />):
+    Debug.log(<span class="str">"Something went wrong While Scaling"</span>)
+    module_DeleteProject.deleteProject(nameOfProject);
+    Debug.log(<span class="str">"TEST FAILED!!"</span>)
+    exit()
+
+<span class="cmt"># Soft Save the project.
+</span>module_CommonImagesSet.clickOnLightSave()
+
+<span class="cmt"># Publish the drawing.
+</span>module_PublishDrawing.publishDrawing()
+
+<span class="cmt"># close the project.
+</span>module_CommonImagesSet.closeProject()
+<span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="cmt"># Delete the test project.
+</span><span class="cmt"># module_DeleteProject.deleteProject(nameOfProject)
+</span>
+Debug.log(<span class="str">"TEST PASSED!!"</span>)
+</pre>
+</body>
+</html>

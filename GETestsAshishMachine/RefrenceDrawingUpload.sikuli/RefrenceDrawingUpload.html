@@ -1,0 +1,147 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>RefrenceDrawingUpload.sikuli</h2> <a href="RefrenceDrawingUpload.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="cmt"># Component Upload and Delete Testing.
+</span><span class="kw">import</span> os
+<span class="kw">import</span> sys
+<span class="kw">import</span> module_CommonImagesSet
+
+refrenceDrawingName = <span class="str">"AUTOMATION TEST REFRENCE DRAWING"</span>
+uploadDialogRegion = Region(<span class="dig">666</span>,<span class="dig">320</span>,<span class="dig">588</span>,<span class="dig">463</span>)
+success = True
+
+<span class="cmt"># Open settings page.
+</span><span class="skw">click</span>(module_CommonImagesSet.settingsGearIcon)
+
+<span class="cmt"># Click on refrenceDrawing Library tab.
+</span><span class="skw">click</span>(module_CommonImagesSet.refrenceDrawingTab)
+
+<span class="cmt"># Click on refrenceDrawing add button.
+</span><span class="skw">click</span>(module_CommonImagesSet.addButton)
+
+match = <span class="skw">find</span>(Pattern(<img src="referenceDrawingLabel.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+
+<span class="cmt"># Title of the refrenceDrawing.
+</span><span class="skw">click</span>(match.getTarget().offset(-<span class="dig">64</span>,<span class="dig">79</span>))
+<span class="skw">type</span>(refrenceDrawingName)
+<span class="cmt"># Description
+</span><span class="skw">click</span>(match.getTarget().offset(-<span class="dig">64</span>,<span class="dig">150</span>))
+<span class="skw">type</span>(<span class="str">"Automation Test"</span>)
+
+<span class="cmt"># Upload a sample refrenceDrawing file.
+</span><span class="cmt"># A. get the sample file path.
+</span>commonImagePath = module_CommonImagesSet.mapTypeRoadImage.getFilename()
+commonDirectoryPath = os.path.dirname(commonImagePath)
+refrenceDWG = commonDirectoryPath + <span class="str">"\\"</span> + refrenceDrawingName + <span class="str">".DWG"</span>
+Debug.log(refrenceDWG)
+<span class="cmt"># B. Type the path in File Open Dialog hit enter.
+</span><span class="skw">click</span>(module_CommonImagesSet.chooseFileButton)
+<span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="skw">type</span>(refrenceDWG + Key.ENTER)
+
+<span class="cmt"># Click on upload button.
+</span><span class="skw">click</span>(uploadDialogRegion.<span class="skw">find</span>(module_CommonImagesSet.cancelUploadButton).getTarget().offset(<span class="dig">90</span>, <span class="dig">0</span>))
+<span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="cmt"># Wait till the upload is complete.
+</span><span class="cmt"># Add button once again gets activated once upload is complete.
+</span><span class="cmt">#wait(module_CommonImagesSet.addButton, 40)
+</span>
+<span class="skw">wait</span>(module_CommonImagesSet.addButton, <span class="dig">100</span>)
+
+<span class="kw">if</span> <span class="kw">not</span> exists(module_CommonImagesSet.addButton):
+    Debug.log(<span class="str">"ERROR: Component loading either failed or took too much time."</span>)
+    success = False
+
+<span class="kw">else</span>:
+    <span class="cmt"># Check if the drawing has been added successfully.
+</span>    titleColumn = <span class="skw">find</span>(module_CommonImagesSet.columnTitleHeader)
+    <span class="skw">click</span>(titleColumn.getTarget().offset(<span class="dig">0</span>,<span class="dig">34</span>)) <span class="cmt"># Select the reference drawing</span>
+    <span class="skw">type</span>(refrenceDrawingName)
+
+    newRefDrawingRow = <img src="newRefDrawingRow.png" />
+    <span class="kw">if</span> <span class="kw">not</span> exists (newRefDrawingRow):
+        Debug.log(<span class="str">"ERROR: refrenceDrawing is not found in the library after upload."</span>)
+        success = False
+    <span class="kw">else</span>:
+        Debug.log(<span class="str">"INFO: refrenceDrawing is uploaded successfully."</span>)
+
+<span class="cmt"># close admin page
+</span><span class="skw">click</span>(module_CommonImagesSet.closeButton)
+
+<span class="kw">if</span> success:
+    Debug.log(<span class="str">"TEST PASSED!!"</span>)
+<span class="kw">else</span>:
+    Debug.log(<span class="str">"TEST FAILED!!"</span>)
+</pre>
+</body>
+</html>

@@ -1,0 +1,130 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>MultiplePolygons.sikuli</h2> <a href="MultiplePolygons.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> os
+<span class="kw">import</span> sys
+<span class="kw">import</span> module_DeleteProject
+<span class="kw">import</span> module_CreateProject
+<span class="kw">import</span> module_CreatePolygonInTexas
+<span class="kw">import</span> module_CommonImagesSet
+
+nameOfProject = <span class="str">"Test Multiple Polygons"</span>
+<span class="cmt"># First delete existing project if any.
+</span>module_DeleteProject.deleteProject(nameOfProject)
+<span class="cmt"># Create new project.
+</span>module_CreateProject.createProject(nameOfProject)
+
+<span class="cmt"># Create first polygon somewhere in Texas.
+</span>module_CreatePolygonInTexas.createPolygonInTexas()
+
+<span class="skw">type</span>(Key.ESC + Key.ESC)
+
+<span class="cmt"># Check the properties.
+</span><span class="skw">click</span>(Pattern(<img src="mapPropertiesAccordion.png" />).similar(<span class="dig">0.81</span>).targetOffset(-<span class="dig">123</span>,-<span class="dig">1</span>))
+<span class="skw">wait</span>(<span class="dig">1</span>)
+
+valueInSquareMeterDropdown = Pattern(<img src="valueInSquareMeterDropdown.png" />).targetOffset(<span class="dig">36</span>,<span class="dig">1</span>)
+exists(valueInSquareMeterDropdown)
+
+
+<span class="cmt"># check meter feet works or not.
+</span><span class="skw">click</span>(valueInSquareMeterDropdown)
+<span class="skw">click</span>(Pattern(<img src="sqFtInDropDown.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+exists(<img src="valueSqFtButton.png" />)
+
+<span class="cmt"># check location.
+</span>exists(Pattern(<img src="polygonsAndLocation.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+
+<span class="cmt"># Draw second polygon.
+</span>
+<span class="skw">click</span>(<img src="polygonInMapToolbar.png" />)
+<span class="skw">click</span>(<img src="corner1.png" />)
+<span class="skw">click</span>(<img src="corner2.png" />)
+<span class="skw">click</span>(<img src="corner3.png" />)
+<span class="skw">click</span>(<img src="corner4.png" />)
+<span class="skw">click</span>(<img src="corner5.png" />)
+
+<span class="skw">wait</span>(<span class="dig">1</span>)
+<span class="skw">type</span>(Key.ESC)
+exists(Pattern(<img src="twoInstancesUnderPolygons.png" />).similar(<span class="dig">0.88</span>).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+
+<span class="cmt"># close the project.
+</span>module_CommonImagesSet.closeProject()
+<span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="cmt"># Delete the project.
+</span>module_DeleteProject.deleteProject(nameOfProject)
+
+Debug.log(<span class="str">"TEST PASSED!!"</span>)
+</pre>
+</body>
+</html>

@@ -1,0 +1,238 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>PDFUploadWorkflow.sikuli</h2> <a href="PDFUploadWorkflow.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> os
+<span class="kw">import</span> sys
+<span class="kw">import</span> module_CreateProject
+<span class="kw">import</span> module_DeleteProject
+<span class="kw">import</span> module_CreatePolygonInTexas
+<span class="kw">import</span> module_CommonImagesSet
+<span class="kw">import</span> module_PublishDrawing
+<span class="kw">import</span> module_ReopenSavedProject
+
+nameOfProject = <span class="str">"Test Reference PDF Upload"</span>
+<span class="kw">if</span>(<span class="dig">1</span>):
+    <span class="cmt"># First delete existing project if any.
+</span>    module_DeleteProject.deleteProject(nameOfProject)
+    <span class="cmt"># Create new project.
+</span>    module_CreateProject.createProjectForPDFWorkflow(nameOfProject)
+
+    <span class="cmt"># Wait for Bingmap to load.
+</span>    module_CommonImagesSet.waitForBingMapActivation()
+
+    <span class="cmt"># delete a default Pushpin.
+</span>    module_CommonImagesSet.deleteDefaultPushPin(module_CommonImagesSet.defualtPushpinOnIndia.targetOffset(<span class="dig">0</span>,<span class="dig">0</span>))
+
+    <span class="cmt"># Go to a location near Texas.
+</span>    module_CommonImagesSet.goToLocation(<span class="str">"{29.693109, -95.085302}"</span>)
+
+    <span class="cmt"># Switch to Arial Mode.
+</span>    module_CommonImagesSet.switchToArialView()
+
+    <span class="cmt"># Upload a sample file.
+</span>    <span class="cmt"># A. get the sample file path.
+</span>    commonImagePath = module_CommonImagesSet.mapTypeRoadImage.getFilename()
+    commonDirectoryPath = os.path.dirname(commonImagePath)
+    referencePDF = commonDirectoryPath + <span class="str">"\ReferencePDF.PDF"</span>
+    Debug.log(referencePDF)
+    <span class="cmt"># B. Type the path in File Open Dialog hit enter.
+</span>    <span class="skw">click</span>(module_CommonImagesSet.chooseFileButton)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(referencePDF + Key.ENTER)
+
+    <span class="cmt"># Upload is done. Go to Forge.
+</span>    module_CommonImagesSet.waitForForgeActivation()
+    module_CommonImagesSet.clickOnMapModelSlider()
+    <span class="skw">wait</span>(<span class="dig">3</span>)
+
+    success = True
+    <span class="kw">if</span> <span class="kw">not</span> exists (module_CommonImagesSet.predixCalibrationRequiredDialog):
+        success = False
+        Debug.log(<span class="str">"ERROR: PDF calibration dialog has not appeared."</span>)
+
+    <span class="skw">click</span>(module_CommonImagesSet.cancelOkayButton)
+
+    <span class="kw">if</span> <span class="kw">not</span> exists (module_CommonImagesSet.forgeCalibrateNowDialog, <span class="dig">5</span>):
+        success = False
+        Debug.log(<span class="str">"ERROR: Forge calibration dialog has not appeared."</span>)
+
+    <span class="skw">click</span>(module_CommonImagesSet.forgeCalibrateNowDialog.targetOffset(<span class="dig">97</span>,<span class="dig">61</span>))
+
+    module_CommonImagesSet.fitToView()
+
+    <span class="cmt"># Calibrate now
+</span>    match = <span class="skw">find</span>(Pattern(<img src="PDF-GSUT.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+    <span class="skw">click</span>(match.getTarget().offset(-<span class="dig">55</span>, -<span class="dig">22</span>)) <span class="cmt"># road left end</span>
+    <span class="skw">click</span>(match.getTarget().offset(-<span class="dig">35</span>, -<span class="dig">22</span>)) <span class="cmt"># road right end</span>
+
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+
+    <span class="cmt"># Calibration dialog. Set 6 meters.
+</span>
+    match = <span class="skw">find</span>(Pattern(<img src="setCalibrationButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">105</span>, -<span class="dig">90</span>)) <span class="cmt"># click on define size field.</span>
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    <span class="skw">type</span>(<span class="str">"6"</span>)
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">0</span>, -<span class="dig">53</span>)) <span class="cmt"># click on unit type dropdown.</span>
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">0</span>, -<span class="dig">12</span>)) <span class="cmt"># click on metres.</span>
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    <span class="skw">click</span>(match.getTarget())
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+    <span class="cmt"># Unlock map and move model on appropriate position.
+</span>    match = <span class="skw">find</span>(module_CommonImagesSet.lockButtonToChangeMapView)
+    <span class="skw">click</span>(match)
+
+    referencePosition = <span class="skw">find</span>(Pattern(<img src="referencePosition.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)).getTarget()
+    <span class="skw">dragDrop</span>(referencePosition.offset(<span class="dig">7</span>, -<span class="dig">51</span>) , referencePosition.offset(-<span class="dig">210</span>, <span class="dig">8</span>))
+
+    <span class="cmt"># Lock the map with forge PDF again.
+</span>    <span class="skw">click</span>(match)
+
+    <span class="cmt"># Permit to make the positional changes.
+</span>    <span class="skw">click</span>(module_CommonImagesSet.chromeOkCancelDialog)
+
+    newReferencePosition = <span class="skw">find</span>(Pattern(<img src="newReferencePosition.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+    <span class="cmt"># Now draw the plygon.
+</span>    <span class="skw">click</span>(Pattern(<img src="drawPolugonButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+    <span class="skw">click</span>(newReferencePosition.offset(<span class="dig">53</span>, <span class="dig">371</span>))
+    <span class="skw">click</span>(newReferencePosition.offset(<span class="dig">19</span>, -<span class="dig">78</span>))
+    <span class="skw">click</span>(newReferencePosition.offset(<span class="dig">125</span>, -<span class="dig">77</span>))
+    <span class="skw">click</span>(newReferencePosition.offset(<span class="dig">136</span>, -<span class="dig">220</span>))
+    <span class="skw">click</span>(newReferencePosition.offset(<span class="dig">398</span>, -<span class="dig">210</span>))
+    <span class="skw">click</span>(newReferencePosition.offset(<span class="dig">409</span>, <span class="dig">128</span>))
+    <span class="skw">click</span>(newReferencePosition.offset(<span class="dig">206</span>, <span class="dig">365</span>))
+    <span class="skw">type</span>(Key.ESC)
+
+    <span class="skw">click</span>(Pattern(<img src="finishButtonAfterDrawpolygon.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>))
+    <span class="skw">wait</span>(<span class="dig">3</span>)
+
+<span class="cmt"># Carbon should show map view now.
+</span><span class="cmt"># switch back to forge again and check if everything is fine.
+</span>module_CommonImagesSet.waitForForgeActivation()
+module_CommonImagesSet.clickOnMapModelSlider()
+
+<span class="kw">if</span> <span class="kw">not</span> exists(Pattern(<img src="twoTMsSideBySide.png" />).similar(<span class="dig">0.35</span>)):
+    Debug.log(<span class="str">"Something went wrong in Forge View"</span>)
+    <span class="cmt">#module_DeleteProject.deleteProject(nameOfProject)
+</span>
+<span class="cmt"># drag drop few components.
+</span>dropTargetLocationMatch = <span class="skw">find</span>(module_CommonImagesSet.dropLocationAboveCamera)
+dropLocation = dropTargetLocationMatch.getTarget().offset(<span class="dig">0</span>,-<span class="dig">142</span>)
+<span class="cmt"># Drag drop a TM2500 PULSE ANTI ICING FILTER component
+</span>module_CommonImagesSet.dragDropComponentToLocation(<span class="str">"TM2500 PULSE ANTI ICING FILTER"</span>, module_CommonImagesSet.TM2500_PULSE_ANTI_ICING_FILTER, dropLocation)
+module_CommonImagesSet.dragDropComponentToLocation(<span class="str">"GENERATOR STEP UP TRANSFORMER WITH FIREWALL"</span>, module_CommonImagesSet.GENERATOR_STEP_UP_TRANSFORMER_WITH_FIREWALL, dropLocation.offset(-<span class="dig">350</span>, <span class="dig">0</span>))
+
+<span class="skw">wait</span>(<span class="dig">1</span>)
+module_CommonImagesSet.fitToView()
+
+<span class="cmt"># Light Save the project.
+</span>module_CommonImagesSet.clickOnLightSave()
+
+<span class="cmt"># close the project.
+</span>module_CommonImagesSet.closeProject()
+<span class="skw">wait</span>(<span class="dig">1</span>)
+
+afterReloadModel = Pattern(<img src="afterReloadModel.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+saveThumbnail = Pattern(<img src="saveThumbnail.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+saveComplete = module_ReopenSavedProject.reopenSavedProject(nameOfProject, <span class="str">"v1.1"</span>, saveThumbnail, True);
+<span class="kw">if</span> saveComplete:
+    Debug.log(<span class="str">"INFO: Save is compelete"</span>)
+    <span class="cmt"># check the forge view
+</span>    <span class="kw">if</span> module_CommonImagesSet.waitForForgeActivation():
+        module_CommonImagesSet.clickOnMapModelSlider()
+        <span class="kw">if</span> <span class="kw">not</span> exists(afterReloadModel, <span class="dig">5</span>):
+            Debug.log(<span class="str">"ERROR: Unexpected scene after reopen"</span>)
+            success = False
+    <span class="kw">else</span>:
+        Debug.log(<span class="str">"ERROR: Forge is not active"</span>)
+        success = False
+
+<span class="kw">else</span>:
+    Debug.log(<span class="str">"SAVE FAILED!!"</span>)
+    success = False
+
+<span class="cmt"># close the project.
+</span>module_CommonImagesSet.closeProject()
+<span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="cmt"># Delete Project.
+</span><span class="cmt"># module_DeleteProject.deleteProject(nameOfProject)
+</span>
+<span class="kw">if</span> success:
+    Debug.log(<span class="str">"TEST PASSED!!"</span>)
+<span class="kw">else</span>:
+    Debug.log(<span class="str">"TEST FAILED!!"</span>)
+</pre>
+</body>
+</html>

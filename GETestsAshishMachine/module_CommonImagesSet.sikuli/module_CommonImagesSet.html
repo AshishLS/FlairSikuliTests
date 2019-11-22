@@ -1,0 +1,291 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>module_CommonImagesSet.sikuli</h2> <a href="module_CommonImagesSet.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">from</span> sikuli <span class="kw">import</span> *
+<span class="kw">import</span> os
+<span class="kw">import</span> sys
+
+mapTypeRoadImage = Pattern(<img src="mapTypeRoadImage.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+settingsGearIcon = <img src="settingsGearIcon.png" />
+
+selectViewImage = Pattern(<img src="SelectView.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+
+imgTransformIcon = Pattern(<img src="imgTransformIcon.png" />).targetOffset(<span class="dig">12</span>,-<span class="dig">13</span>)
+imgTranslateObjectIcon = <img src="imgTranslateObjectIcon.png" />
+imgRotateObjectIcon = <img src="imgRotateObjectIcon.png" />
+dropLocationAboveCamera =  Pattern(<img src="dropLocationAboveCamera.png" />).similar(<span class="dig">0.86</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
+rollCameraIcon = Pattern(<img src="rollCameraIcon.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+propertiesButton = Pattern(<img src="propertiesButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">1</span>)
+layersButton = Pattern(<img src="layersButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+closeButton = Pattern(<img src="closeButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+lockButtonToChangeMapView = Pattern(<img src="lockButtonToChangeMapView.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+placeToClickToChangeMapView = Pattern(<img src="placeToClickToChangeMapView.png" />).targetOffset(<span class="dig">1</span>,-<span class="dig">1</span>)
+createButton = Pattern(<img src="CreateButton.png" />).similar(<span class="dig">0.88</span>).targetOffset(<span class="dig">1</span>,<span class="dig">1</span>)
+unloadingTruckImg = Pattern(<img src="unloadingTruckImg.png" />).similar(<span class="dig">0.62</span>).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+transformPartition = Pattern(<img src="transformPartition.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+scaleByDistance = Pattern(<img src="scaleByDistance.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+applyScaleButton = Pattern(<img src="applyScaleButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+saveButton = Pattern(<img src="saveButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+changLogButton = Pattern(<img src="changLogButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+saveButtonOnDialog = Pattern(<img src="saveButtonOnDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+columnNameHeader = Pattern(<img src="nameColumnHeader.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+columnTitleHeader = Pattern(<img src="columnTitleHeader.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+versionNumberColumnHeader = Pattern(<img src="versionNumberColumnHeader.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+cancelButton = Pattern(<img src="cancelButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+
+dialogRegion =  Region(<span class="dig">457</span>,<span class="dig">0</span>,<span class="dig">1011</span>,<span class="dig">1080</span>)
+cancelOkayButton = Pattern(<img src="cancelOkayButton.png" />).targetOffset(<span class="dig">39</span>,<span class="dig">0</span>)
+mapToolbar = Pattern(<img src="mapToolbar.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+defualtPushpinOnIndia = Pattern(<img src="defaultPushpinOnIndia.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+chooseFileButton = Pattern(<img src="chooseFileButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+
+locationAccordion = Pattern(<img src="locationAccordion.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+
+gotoLocationButton = Pattern(<img src="gotoLocationButton.png" />).similar(<span class="dig">0.91</span>).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+
+predixCalibrationRequiredDialog = Pattern(<img src="predixCalibrationRequiredDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+forgeCalibrateNowDialog = Pattern(<img src="forgeCalibrateNowDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+componentLibraryTab = Pattern(<img src="componentLibraryTab.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+refrenceDrawingTab = <img src="refrenceDrawingTab.png" />
+addButton = Pattern(<img src="addButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+cancelUploadButton = Pattern(<img src="cancelUploadButton.png" />).targetOffset(<span class="dig">15</span>,<span class="dig">0</span>)
+removeButton = Pattern(<img src="removeButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+cancelAndRemoveButton = Pattern(<img src="cancelAndRemoveButton.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+chromeOkCancelDialog = Pattern(<img src="chromeOkCancelDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+TM2500_PULSE_ANTI_ICING_FILTER = Pattern(<img src="TM2500_PULSE_ANTI_ICING_FILTER.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+GENERATOR_STEP_UP_TRANSFORMER_WITH_FIREWALL = Pattern(<img src="GENERATOR_STEP_UP_TRANSFORMER_WITH_FIREWALL.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+DEMIN_WATER_TREATMENT_SKID = Pattern(<img src="DEMIN_WATER_TREATMENT_SKID.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+<span class="kw">def</span> closeProject():
+    <span class="skw">click</span>(closeButton)
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    match = dialogRegion.<span class="skw">wait</span>(cancelOkayButton, <span class="dig">5</span>)
+    <span class="skw">click</span>(match.getTarget())
+
+<span class="kw">def</span> fitToView():
+    match = <span class="skw">find</span>(dropLocationAboveCamera)
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">12</span>,-<span class="dig">9</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">0</span>, -<span class="dig">100</span>))
+
+<span class="kw">def</span> removePreExistingText():
+    keyDown(Key.CTRL)
+    keyDown(<span class="str">"a"</span>)
+    keyUp(<span class="str">"a"</span>)
+    keyUp(Key.CTRL)
+    keyDown(Key.DELETE)
+
+<span class="kw">def</span> waitForForgeActivation():
+    <span class="kw">if</span> exists(<img src="allowKnowYourLocation.png" />,<span class="dig">2</span>):
+        <span class="skw">click</span>(<img src="AllowButton.png" />)
+    <span class="cmt"># wait for forge to load.
+</span>    <span class="kw">if</span> <span class="kw">not</span> exists(selectViewImage, <span class="dig">50</span>):
+        Debug.log(<span class="str">"ERROR: FORGE LOADING FAILED!!"</span>)
+        Debug.log(<span class="str">"TEST FAILED!!"</span>)
+        <span class="kw">return</span> False
+    <span class="kw">return</span> True
+
+<span class="kw">def</span> waitForBingMapActivation():
+    <span class="kw">if</span> exists(<img src="allowKnowYourLocation.png" />,<span class="dig">2</span>):
+        <span class="skw">click</span>(<img src="AllowButton.png" />)
+    <span class="cmt"># wait for forge to load.
+</span>    <span class="kw">if</span> <span class="kw">not</span> exists(mapTypeRoadImage, <span class="dig">30</span>):
+        Debug.log(<span class="str">"ERROR: BINGMAP LOADING FAILED!!"</span>)
+        Debug.log(<span class="str">"TEST FAILED!!"</span>)
+        <span class="kw">return</span> False
+    <span class="kw">return</span> True
+
+<span class="kw">def</span> clickOnMapModelSlider():
+    match = <span class="skw">find</span>(placeToClickToChangeMapView)
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">0</span>, -<span class="dig">48</span>))
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">0</span>, -<span class="dig">23</span>)) <span class="cmt"># redundant</span>
+
+<span class="kw">def</span> clickOnLightSave():
+    match = <span class="skw">find</span>(saveButton)
+    <span class="skw">click</span>(match.getTarget())
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">0</span>, <span class="dig">30</span>))
+
+<span class="kw">def</span> clickOnSaveAsVersion():
+    match = <span class="skw">find</span>(saveButton)
+    <span class="skw">click</span>(match.getTarget())
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">0</span>, <span class="dig">50</span>))
+
+<span class="kw">def</span> dragDropComponentToLocation(componentName, componentImage, dropLocation):
+    componentPartitionImage = Pattern(<img src="componentPartitionImage.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+    match = <span class="skw">find</span>(componentPartitionImage)
+
+    <span class="skw">click</span>(match.getTarget())
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">250</span>,<span class="dig">42</span>))
+    <span class="cmt"># Delete preexisting text and add our own.
+</span>    removePreExistingText()
+    <span class="cmt"># Get a given component and drag drop.
+</span>    <span class="skw">type</span>(componentName)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">if</span> <span class="kw">not</span> exists(componentImage):
+        message = <span class="str">"ERROR: Component %s thumbnail is not visible. Something went wrong."</span> % (componentName)
+        Debug.log(message)
+        Debug.log(<span class="str">"ERROR: TEST FAILED!!!"</span>)
+        <span class="kw">raise</span> Exception(message)
+    <span class="cmt"># Drop on the given location
+</span>    <span class="skw">dragDrop</span>(match.getTarget().offset(<span class="dig">72</span>,<span class="dig">195</span>), dropLocation)
+    <span class="cmt"># close the accordian
+</span>    <span class="skw">click</span>(match.getTarget())
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+<span class="kw">def</span> selectAbunchOfComponents():
+    <span class="cmt"># Wrench Icon (Transform as reference)
+</span>    transformIcon = imgTransformIcon.targetOffset(<span class="dig">0</span>,<span class="dig">0</span>)
+    match = <span class="skw">find</span>(transformIcon)
+    matchLocation = match.getTarget()
+
+    keyDown(Key.CTRL)
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">509</span>,-<span class="dig">366</span>)) <span class="cmt">#left TM</span>
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">158</span>,-<span class="dig">366</span>)) <span class="cmt">#right TM</span>
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">636</span>,-<span class="dig">564</span>)) <span class="cmt"># GSUT</span>
+
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">280</span>, -<span class="dig">672</span>)) <span class="cmt">#left Unlocading Truck</span>
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">158</span>,-<span class="dig">672</span>)) <span class="cmt">#right Unlocading Truck</span>
+
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">176</span>,-<span class="dig">510</span>)) <span class="cmt"># Leftmost Horizontal Tank</span>
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">141</span>,-<span class="dig">510</span>))
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">105</span>,-<span class="dig">510</span>))
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">68</span>,-<span class="dig">510</span>))
+    <span class="skw">click</span>(matchLocation.offset(-<span class="dig">34</span>,-<span class="dig">510</span>))
+    <span class="skw">click</span>(matchLocation.offset(<span class="dig">5</span>,-<span class="dig">510</span>)) <span class="cmt"># RightmostHorizontal Tank</span>
+    keyUp(Key.CTRL)
+
+<span class="kw">def</span> deleteDefaultPushPin(pushpinLocation):
+    match = <span class="skw">find</span>(mapToolbar)
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">47</span>,<span class="dig">0</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(pushpinLocation)
+
+<span class="kw">def</span> goToLocation(locationString):
+    match = <span class="skw">find</span>(locationAccordion)
+    <span class="kw">if</span> <span class="kw">not</span> exists(<img src="locationAccordianContent.png" />):
+        <span class="skw">click</span>(match.getTarget())
+
+    hover(changLogButton)
+    <span class="skw">click</span>(match.getTarget().offset(<span class="dig">67</span>,<span class="dig">61</span>))
+    <span class="cmt"># Delete preexisting text and add our own.
+</span>    removePreExistingText()
+
+    <span class="cmt"># Open plot somewhere in Texas.
+</span>    <span class="skw">type</span>(locationString)
+    hover(changLogButton)
+    rightHandSideRegion = <span class="skw">find</span>(changLogButton).left(<span class="dig">100</span>).right(<span class="dig">500</span>).below(<span class="dig">1000</span>)
+    rightHandSideRegion.<span class="skw">click</span>(gotoLocationButton)
+
+<span class="kw">def</span> switchToArialView():
+    match = <span class="skw">find</span>(mapTypeRoadImage)
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    <span class="skw">click</span>(match.getTarget())
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    <span class="skw">click</span>(match.getTarget().offset(-<span class="dig">27</span>,<span class="dig">153</span>))
+
+<span class="kw">def</span> changeTheRollCameraModeToDefault():
+    rollCameraLocation = <span class="skw">find</span>(rollCameraIcon).getTarget()
+    <span class="skw">click</span>(rollCameraLocation.offset(<span class="dig">12</span>,-<span class="dig">12</span>))
+    <span class="skw">click</span>(rollCameraLocation.offset(<span class="dig">0</span>,-<span class="dig">100</span>))
+
+<span class="kw">def</span> rotateAndMoveWholeModel():
+    <span class="cmt"># Rotate Whole model, place it at a new location.
+</span>    <span class="cmt"># Unlock map and move model on appropriate position.
+</span>    lockButtonPosition = <span class="skw">find</span>(lockButtonToChangeMapView)
+    <span class="skw">click</span>(lockButtonPosition)
+
+    cameraLocation = <span class="skw">find</span>(dropLocationAboveCamera).getTarget()
+    <span class="skw">click</span>(cameraLocation)
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    <span class="skw">click</span>(cameraLocation.offset(<span class="dig">0</span>,-<span class="dig">50</span>))
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+
+    referencePosition = <span class="skw">find</span>(imgTransformIcon).getTarget()
+    <span class="cmt"># Rotate
+</span>    <span class="skw">dragDrop</span>(referencePosition.offset(-<span class="dig">650</span>, -<span class="dig">75</span>) , referencePosition.offset(<span class="dig">500</span>, -<span class="dig">75</span>))
+
+    <span class="cmt"># Pan
+</span>    <span class="skw">click</span>(cameraLocation.offset(-<span class="dig">100</span>, <span class="dig">0</span>)) <span class="cmt"># Click on Pan Button.</span>
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    <span class="skw">dragDrop</span>(referencePosition.offset(-<span class="dig">650</span>, -<span class="dig">75</span>) , referencePosition.offset(-<span class="dig">0</span>, -<span class="dig">75</span>))
+
+    <span class="skw">click</span>(lockButtonPosition)
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+
+    <span class="cmt"># Permit to make the positional changes.
+</span>    <span class="skw">click</span>(chromeOkCancelDialog)
+
+    <span class="cmt"># Change the roll camera mode back.
+</span>    changeTheRollCameraModeToDefault()
+</pre>
+</body>
+</html>
