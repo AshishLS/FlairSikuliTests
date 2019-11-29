@@ -86,6 +86,7 @@ incognitoChromeLeftCorner = <img src="incognitoChromeLeftCorner.png" />
 <span class="kw">def</span> getIncognitoChromeLeftCorner():
     <span class="kw">return</span> Pattern(incognitoChromeLeftCorner).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
 
+old_flair3DLogoInTheApp = <img src="old_flair3DLogoInTheApp.png" />
 flair3DLogoInTheApp = <img src="Flair3DLogoInTheApp.png" />
 <span class="kw">def</span> getFlair3DLogoInTheApp():
     <span class="kw">return</span> Pattern(flair3DLogoInTheApp).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
@@ -119,6 +120,7 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
 </span>    <span class="skw">click</span>(getIncognitoChromeLeftCorner().targetOffset(<span class="dig">400</span>,<span class="dig">90</span>))
     <span class="cmt"># take cursor back to address bar
 </span>    <span class="skw">type</span>(Key.ESC)
+    <span class="skw">click</span>(getIncognitoChromeLeftCorner().targetOffset(<span class="dig">400</span>,<span class="dig">15</span>))
     <span class="skw">wait</span>(<span class="dig">1</span>)
 
 <span class="kw">def</span> closeChrome():

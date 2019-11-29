@@ -51,7 +51,7 @@ def checkMarkupWorkflow():
 
     # new markup a circle perhaps.
     # doubleClick on mid section to zoom to it
-    doubleClick(Pattern("bottomToolBarFirstSection.png").targetOffset(275,-460))
+    doubleClick(Pattern("bottomToolBarFirstSection.png").targetOffset(285,-455))
     click(Pattern("bottomToolBarFirstSection.png").targetOffset(-140,-70)) # click outside to unselect
     
     click(Pattern("bottomToolBarFirstSection.png").targetOffset(530,0)) # click on markup button
@@ -65,12 +65,14 @@ def checkMarkupWorkflow():
     click(Pattern("markupViewDialog.png").targetOffset(65,-125))
     wait(0.5)
     
-    drawLocation = module_CommonResource.getFlair3DLogoInTheApp().targetOffset(875, 425).getTargetOffset()
+    drawLocation = module_CommonResource.getFlair3DLogoInTheApp().targetOffset(1350, 225).getTargetOffset()
+    print drawLocation
     dragDrop(drawLocation, Location(drawLocation.getX() + 200, drawLocation.getY() + 200))
+    dragDrop(drawLocation, Location(drawLocation.getX() + 100, drawLocation.getY() + 100)) # draw two so that we can easily identify
 
     # add a markup name and save
     click(Pattern("markupViewDialog.png").targetOffset(-115,25)) # editable textbox
-    assert exists(Pattern("circleMarkup.png").similar(0.90)), "ERROR: Circle markup messed while drawing"
+    assert exists(Pattern("CirlceMarkup.png").similar(0.80)), "ERROR: Circle markup messed while drawing"
     paste("Middle Road")
     click(Pattern("markupViewDialog.png").targetOffset(95,25)) # save
     # close the markup saved message
@@ -86,7 +88,7 @@ def checkMarkupWorkflow():
         click(Pattern("twoMarkupEntries.png").targetOffset(-85,-20)) # select 1st cloud markup
         assert exists(Pattern("cloudMarkupCorner.png").targetOffset(1,0)), "ERROR: Something wrong with the 1st cloud Markup"
         click(Pattern("twoMarkupEntries.png").targetOffset(-85,20)) # select second markup
-        assert exists(Pattern("circleMarkup.png").similar(0.90)), "ERROR: Something wrong with the 1st Markup"
+        assert exists(Pattern("CirlceMarkup.png").similar(0.80)), "ERROR: Something wrong with the 1st Markup"
     
     checkMarkupsAreSavedCorrectly()
     print ("INFO: Both markups seems correct. In the same session. Let's check for different session.")
@@ -106,9 +108,9 @@ def checkMarkupWorkflow():
     # delete the markups.
     
     click(Pattern("twoMarkupEntries.png").targetOffset(100,-20)) # delete first markup
-    click(Pattern("1574252639877.png").targetOffset(145,50)) # confirm delete
+    click(Pattern("MarkupDeleteConfirmation.png").targetOffset(35,60)) # confirm delete
     click(Pattern("twoMarkupEntries.png").targetOffset(100,-20)) # delete second markup
-    click(Pattern("1574252639877.png").targetOffset(145,50)) # confirm delete
+    click(Pattern("MarkupDeleteConfirmation.png").targetOffset(35,60)) # confirm delete
     
     assert not exists (Pattern("twoMarkupEntries.png").similar(0.90).targetOffset(1,0)), "ERROR: Markups are still showing in the UI"
 

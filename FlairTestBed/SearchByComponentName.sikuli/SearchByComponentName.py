@@ -32,7 +32,7 @@ def checkSearchByComponentName():
     click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-10,335)) # Click on Fit To view checkBox
 
     print "LOG: Check whether any result appears"
-    assert module_CommonResource.region_leftPanel.exists("1574348800068.png", 10), "ERROR: No or incorrect serach result appeared"
+    assert module_CommonResource.region_leftPanel.exists("SearchResults.png", 10), "ERROR: No or incorrect serach result appeared"
     print "LOG: Check the Fit To View checkbox"
     click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(135,425)) # Click on Fit To view checkBox
     

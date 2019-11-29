@@ -123,7 +123,7 @@ module_CommonResource.clickOnViewHome()
 
     <span class="cmt"># new markup a circle perhaps.
 </span>    <span class="cmt"># doubleClick on mid section to zoom to it
-</span>    <span class="skw">doubleClick</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">275</span>,-<span class="dig">460</span>))
+</span>    <span class="skw">doubleClick</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">285</span>,-<span class="dig">455</span>))
     <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(-<span class="dig">140</span>,-<span class="dig">70</span>)) <span class="cmt"># click outside to unselect</span>
 
     <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">530</span>,<span class="dig">0</span>)) <span class="cmt"># click on markup button</span>
@@ -137,12 +137,14 @@ module_CommonResource.clickOnViewHome()
 </span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">65</span>,-<span class="dig">125</span>))
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
 
-    drawLocation = module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">875</span>, <span class="dig">425</span>).getTargetOffset()
+    drawLocation = module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">1350</span>, <span class="dig">225</span>).getTargetOffset()
+    <span class="kw">print</span> drawLocation
     <span class="skw">dragDrop</span>(drawLocation, Location(drawLocation.getX() + <span class="dig">200</span>, drawLocation.getY() + <span class="dig">200</span>))
+    <span class="skw">dragDrop</span>(drawLocation, Location(drawLocation.getX() + <span class="dig">100</span>, drawLocation.getY() + <span class="dig">100</span>)) <span class="cmt"># draw two so that we can easily identify</span>
 
     <span class="cmt"># add a markup name and save
 </span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(-<span class="dig">115</span>,<span class="dig">25</span>)) <span class="cmt"># editable textbox</span>
-    <span class="kw">assert</span> exists(Pattern(<img src="circleMarkup.png" />).similar(<span class="dig">0.90</span>)), <span class="str">"ERROR: Circle markup messed while drawing"</span>
+    <span class="kw">assert</span> exists(Pattern(<img src="CirlceMarkup.png" />).similar(<span class="dig">0.80</span>)), <span class="str">"ERROR: Circle markup messed while drawing"</span>
     paste(<span class="str">"Middle Road"</span>)
     <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">95</span>,<span class="dig">25</span>)) <span class="cmt"># save</span>
     <span class="cmt"># close the markup saved message
@@ -158,7 +160,7 @@ module_CommonResource.clickOnViewHome()
 </span>        <span class="skw">click</span>(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(-<span class="dig">85</span>,-<span class="dig">20</span>)) <span class="cmt"># select 1st cloud markup</span>
         <span class="kw">assert</span> exists(Pattern(<img src="cloudMarkupCorner.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Something wrong with the 1st cloud Markup"</span>
         <span class="skw">click</span>(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(-<span class="dig">85</span>,<span class="dig">20</span>)) <span class="cmt"># select second markup</span>
-        <span class="kw">assert</span> exists(Pattern(<img src="circleMarkup.png" />).similar(<span class="dig">0.90</span>)), <span class="str">"ERROR: Something wrong with the 1st Markup"</span>
+        <span class="kw">assert</span> exists(Pattern(<img src="CirlceMarkup.png" />).similar(<span class="dig">0.80</span>)), <span class="str">"ERROR: Something wrong with the 1st Markup"</span>
 
     checkMarkupsAreSavedCorrectly()
     <span class="kw">print</span> (<span class="str">"INFO: Both markups seems correct. In the same session. Let's check for different session."</span>)
@@ -178,9 +180,9 @@ module_CommonResource.clickOnViewHome()
     <span class="cmt"># delete the markups.
 </span>
     <span class="skw">click</span>(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(<span class="dig">100</span>,-<span class="dig">20</span>)) <span class="cmt"># delete first markup</span>
-    <span class="skw">click</span>(Pattern(<img src="1574252639877.png" />).targetOffset(<span class="dig">145</span>,<span class="dig">50</span>)) <span class="cmt"># confirm delete</span>
+    <span class="skw">click</span>(Pattern(<img src="MarkupDeleteConfirmation.png" />).targetOffset(<span class="dig">35</span>,<span class="dig">60</span>)) <span class="cmt"># confirm delete</span>
     <span class="skw">click</span>(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(<span class="dig">100</span>,-<span class="dig">20</span>)) <span class="cmt"># delete second markup</span>
-    <span class="skw">click</span>(Pattern(<img src="1574252639877.png" />).targetOffset(<span class="dig">145</span>,<span class="dig">50</span>)) <span class="cmt"># confirm delete</span>
+    <span class="skw">click</span>(Pattern(<img src="MarkupDeleteConfirmation.png" />).targetOffset(<span class="dig">35</span>,<span class="dig">60</span>)) <span class="cmt"># confirm delete</span>
 
     <span class="kw">assert</span> <span class="kw">not</span> exists (Pattern(<img src="twoMarkupEntries.png" />).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markups are still showing in the UI"</span>
 

@@ -89,23 +89,41 @@ module_CommonResource.clickOnViewHome()
 <span class="kw">def</span> checkLevelsViewIsOkay():
     <span class="kw">assert</span> exists(<img src="FullAirportTerminalLoaded.png" />), <span class="str">"ERROR: looks Like Model is not loaded correctly"</span>
 
-    <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="AllAirportTerminalModelNamesInsideProject.png" />), <span class="str">"ERROR: Check Left panel model names; something is wrong there."</span>
+    <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="AllModelsInLeftPanel.png" />), <span class="str">"ERROR: Check Left panel model names; something is wrong there."</span>
 
     <span class="cmt"># Check if all the levels are okay
+</span>    <span class="cmt"># Unselect all levels
 </span>
-    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">45</span>,<span class="dig">140</span>)) <span class="cmt"># Click On select all models</span>
+    <span class="cmt"># Click On select all models - Not available in current deployment.
+</span>    <span class="cmt">#module_CommonResource.region_leftPanel.click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-45,140)) 
+</span>
+    <span class="cmt"># We will unselect each level one by one.
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">90</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">115</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">140</span>))
+
+    message = <span class="str">"ERROR: After unselecting all the levels, something is still visibile"</span>
+    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(<img src="1574152971881.png" />), message
+
+    <span class="cmt"># Expand the levels as well.
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">83</span>,<span class="dig">90</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">83</span>,<span class="dig">303</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">83</span>,<span class="dig">510</span>))
     <span class="kw">assert</span> <span class="kw">not</span> exists(<img src="AirportTerminalHomeView.png" />, <span class="dig">1</span>), <span class="str">"ERROR: After unselecting all models, the terminal is still visible."</span>
-    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">45</span>,<span class="dig">185</span>)) <span class="cmt"># Click On select Arch models</span>
+    <span class="cmt"># Click On select Arch models
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">90</span>))
     <span class="kw">assert</span> exists(<img src="AirportTerminalOnlyArchModel.png" />, <span class="dig">2</span>), <span class="str">"ERROR: After selecting only Arch model, something went wrong."</span>
     <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="AllLevelsInAirportTerminalArchModel.png" />), <span class="str">"ERROR: Arch model selected, but it problem with all the level count. Check."</span>
-
-    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">45</span>,<span class="dig">390</span>)) <span class="cmt"># Click to unselect All levels</span>
-
-    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(<img src="1574152971881.png" />), <span class="str">"ERROR: After unselecting all the levels, something is still visibile"</span>
+    <span class="cmt"># Click On select Arch models to make it all invisible.
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">90</span>))
     <span class="cmt"># Click on 3rd level and see if we have proper output
-</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">45</span>,<span class="dig">515</span>)) <span class="cmt"># Click on 3rd level</span>
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">36</span>,<span class="dig">163</span>))
     <span class="skw">wait</span>(<span class="dig">1</span>)
     <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(<img src="AirportTerminalArchModelOnlyThirdLevel.png" />), <span class="str">"ERROR: 3rd Level was selected but not an expected result"</span>
+    <span class="cmt"># Click on LevelS of MEP model and check if the output is correct.
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">36</span>,<span class="dig">425</span>))
+    message = <span class="str">"ERROR: 3rd Level of Arch and LevelS of MEP were selected but not an expected result"</span>
+    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(Pattern(<img src="TerminalModelLvl3OfArchAndLvlSofMEP.png" />).similar(<span class="dig">0.80</span>), <span class="dig">2</span>), message
     Debug.log(<span class="str">"INFO: Looks like levels are fine."</span>)
 
 checkLevelsViewIsOkay()

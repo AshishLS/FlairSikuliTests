@@ -14,6 +14,7 @@ incognitoChromeLeftCorner = "incognitoChromeLeftCorner.png"
 def getIncognitoChromeLeftCorner(): 
     return Pattern(incognitoChromeLeftCorner).similar(0.90).targetOffset(0,1)
 
+old_flair3DLogoInTheApp = "old_flair3DLogoInTheApp.png"
 flair3DLogoInTheApp = "Flair3DLogoInTheApp.png"
 def getFlair3DLogoInTheApp(): 
     return Pattern(flair3DLogoInTheApp).similar(0.90).targetOffset(0,1)
@@ -47,6 +48,7 @@ def openChrome():
     click(getIncognitoChromeLeftCorner().targetOffset(400,90))
     # take cursor back to address bar
     type(Key.ESC)
+    click(getIncognitoChromeLeftCorner().targetOffset(400,15))
     wait(1)
 
 def closeChrome():
