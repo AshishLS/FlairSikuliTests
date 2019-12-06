@@ -19,6 +19,10 @@ flair3DLogoInTheApp = "Flair3DLogoInTheApp.png"
 def getFlair3DLogoInTheApp(): 
     return Pattern(flair3DLogoInTheApp).similar(0.90).targetOffset(0,1)
 
+modelsAreReadyMessage = "modelsAreReadyMessage.png"
+def getModelsAreReadyMessage(): 
+    return Pattern(modelsAreReadyMessage).similar(0.90).targetOffset(0,1)
+
 region_leftPanel = Region(0,69,383,940)
 region_centerOfForgeViewer = Region(692,211,898,797)
 
@@ -58,23 +62,23 @@ def closeChrome():
     keyUp(Key.ALT)
     keyUp(Key.F4)
     
-def logoutFromExistingAccont():
+def logoutFromExistingAccount():
     click(getFlairWindowControls().targetOffset(20,0))
     wait(0.5)
     click(getFlairWindowControls().targetOffset(0,130))
     wait(0.5)
     if exists(Pattern("SignOutMessageBox.png"), 2):
-        click(Pattern("SignOutMessageBox.png").targetOffset(145,50))
+        click(Pattern("SignOutMessageBox.png").targetOffset(-50,65))
     wait(2)
 
 def openFlair3DAndLogin():
     wait(0.5)        
     # Open flair3D and login
-    paste("http://dev-flair.get-tech-solutions.com/")
+    paste("https://dev-app.flair3d.com")
     wait(1)
     type(Key.ENTER)
     if exists(getFlair3DLogoInTheApp(), 3):
-        logoutFromExistingAccont()
+        logoutFromExistingAccount()
     assert exists("FlairLoginScreen.png", 4), "ERROR: Login screen is not visible"
     click(Pattern("FlairLoginScreen.png").targetOffset(-150,50))
     removePreExistingText()
@@ -84,9 +88,10 @@ def openFlair3DAndLogin():
     type("winCCTECH@85")
     click(Pattern("FlairLoginScreen.png").targetOffset(-10,190))
     Debug.log("INFO: Successfully logged in")
+    assert exists(getFlair3DLogoInTheApp(), 2)
     wait(2)
 
-def searchForProjectAndOpen(projectName):
+def searchProjectByName(projectName):
     click(getFlair3DLogoInTheApp()) # Make sure you are at home page
     wait(0.5)
     click(getFlair3DLogoInTheApp().targetOffset(300,75))
@@ -95,17 +100,26 @@ def searchForProjectAndOpen(projectName):
     click(getFlair3DLogoInTheApp().targetOffset(300,75)) # Click on the search bar
     type(projectName)
     wait(0.5)
+
+def searchForProjectAndOpen(projectName):
+    searchProjectByName(projectName)
     
     click(getFlair3DLogoInTheApp().targetOffset(865,320)) # Click on the projectTile
-    print "INFO: 33."
-    assert exists(Pattern("projectView.png").targetOffset(1,0), 2) # Check if we are inside the project description
-    print "INFO: Project view success."
+    print "INFO: Going inside the project."
+    # Check if we are inside the project description
+    #if exists("ProjectView.png""CheckBoxesInsideProjectView.png", 4), "ERROR: Project View seems different"
+    if exists("CheckBoxesInsideProjectView.png", 4):
+        print "INFO: Project view success."
+        return 1
+    else:
+        print "INFO: No project found of the name %s", projectName
+        return 0
 
 def selectAllAndOpenProject():
-    click(Pattern("Flair3DLogoInTheApp.png").targetOffset(280,315)) # Click on Select All Checkbox
-    click(Pattern("Flair3DLogoInTheApp.png").targetOffset(425,370)) # Click on a file to open the project
-    wait("ModelsAreReadyMsg.png", 30) # wait for the AEC data load completion
-    click(Pattern("ModelsAreReadyMsg.png").targetOffset(145,0), 30)
+    click(getFlair3DLogoInTheApp().targetOffset(280,338)) # Click on Select All Checkbox
+    click(getFlair3DLogoInTheApp().targetOffset(515,390)) # Click on a file to open the project
+    wait("modelsAreReadyMessage.png", 30) # wait for the AEC data load completion
+    click(Pattern("modelsAreReadyMessage.png").targetOffset(90,0))
     Debug.log("INFO: Models should be ready for search now.")
 
 def clickOnViewHome():

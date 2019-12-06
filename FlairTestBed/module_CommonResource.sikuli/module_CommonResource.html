@@ -91,6 +91,10 @@ flair3DLogoInTheApp = <img src="Flair3DLogoInTheApp.png" />
 <span class="kw">def</span> getFlair3DLogoInTheApp():
     <span class="kw">return</span> Pattern(flair3DLogoInTheApp).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
 
+modelsAreReadyMessage = <img src="modelsAreReadyMessage.png" />
+<span class="kw">def</span> getModelsAreReadyMessage():
+    <span class="kw">return</span> Pattern(modelsAreReadyMessage).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
+
 region_leftPanel = Region(<span class="dig">0</span>,<span class="dig">69</span>,<span class="dig">383</span>,<span class="dig">940</span>)
 region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="dig">211</span>,<span class="dig">898</span>,<span class="dig">797</span>)
 
@@ -130,23 +134,23 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
     keyUp(Key.ALT)
     keyUp(Key.F4)
 
-<span class="kw">def</span> logoutFromExistingAccont():
+<span class="kw">def</span> logoutFromExistingAccount():
     <span class="skw">click</span>(getFlairWindowControls().targetOffset(<span class="dig">20</span>,<span class="dig">0</span>))
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="skw">click</span>(getFlairWindowControls().targetOffset(<span class="dig">0</span>,<span class="dig">130</span>))
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="kw">if</span> exists(Pattern(<img src="SignOutMessageBox.png" />), <span class="dig">2</span>):
-        <span class="skw">click</span>(Pattern(<img src="SignOutMessageBox.png" />).targetOffset(<span class="dig">145</span>,<span class="dig">50</span>))
+        <span class="skw">click</span>(Pattern(<img src="SignOutMessageBox.png" />).targetOffset(-<span class="dig">50</span>,<span class="dig">65</span>))
     <span class="skw">wait</span>(<span class="dig">2</span>)
 
 <span class="kw">def</span> openFlair3DAndLogin():
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="cmt"># Open flair3D and login
-</span>    paste(<span class="str">"http://dev-flair.get-tech-solutions.com/"</span>)
+</span>    paste(<span class="str">"https://dev-app.flair3d.com"</span>)
     <span class="skw">wait</span>(<span class="dig">1</span>)
     <span class="skw">type</span>(Key.ENTER)
     <span class="kw">if</span> exists(getFlair3DLogoInTheApp(), <span class="dig">3</span>):
-        logoutFromExistingAccont()
+        logoutFromExistingAccount()
     <span class="kw">assert</span> exists(<img src="FlairLoginScreen.png" />, <span class="dig">4</span>), <span class="str">"ERROR: Login screen is not visible"</span>
     <span class="skw">click</span>(Pattern(<img src="FlairLoginScreen.png" />).targetOffset(-<span class="dig">150</span>,<span class="dig">50</span>))
     removePreExistingText()
@@ -156,9 +160,10 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
     <span class="skw">type</span>(<span class="str">"winCCTECH@85"</span>)
     <span class="skw">click</span>(Pattern(<img src="FlairLoginScreen.png" />).targetOffset(-<span class="dig">10</span>,<span class="dig">190</span>))
     Debug.log(<span class="str">"INFO: Successfully logged in"</span>)
+    <span class="kw">assert</span> exists(getFlair3DLogoInTheApp(), <span class="dig">2</span>)
     <span class="skw">wait</span>(<span class="dig">2</span>)
 
-<span class="kw">def</span> searchForProjectAndOpen(projectName):
+<span class="kw">def</span> searchProjectByName(projectName):
     <span class="skw">click</span>(getFlair3DLogoInTheApp()) <span class="cmt"># Make sure you are at home page</span>
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="skw">click</span>(getFlair3DLogoInTheApp().targetOffset(<span class="dig">300</span>,<span class="dig">75</span>))
@@ -168,16 +173,25 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
     <span class="skw">type</span>(projectName)
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
 
+<span class="kw">def</span> searchForProjectAndOpen(projectName):
+    searchProjectByName(projectName)
+
     <span class="skw">click</span>(getFlair3DLogoInTheApp().targetOffset(<span class="dig">865</span>,<span class="dig">320</span>)) <span class="cmt"># Click on the projectTile</span>
-    <span class="kw">print</span> <span class="str">"INFO: 33."</span>
-    <span class="kw">assert</span> exists(Pattern(<img src="projectView.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>), <span class="dig">2</span>) <span class="cmt"># Check if we are inside the project description</span>
-    <span class="kw">print</span> <span class="str">"INFO: Project view success."</span>
+    <span class="kw">print</span> <span class="str">"INFO: Going inside the project."</span>
+    <span class="cmt"># Check if we are inside the project description
+</span>    <span class="cmt">#if exists("ProjectView.png""CheckBoxesInsideProjectView.png", 4), "ERROR: Project View seems different"
+</span>    <span class="kw">if</span> exists(<img src="CheckBoxesInsideProjectView.png" />, <span class="dig">4</span>):
+        <span class="kw">print</span> <span class="str">"INFO: Project view success."</span>
+        <span class="kw">return</span> <span class="dig">1</span>
+    <span class="kw">else</span>:
+        <span class="kw">print</span> <span class="str">"INFO: No project found of the name %s"</span>, projectName
+        <span class="kw">return</span> <span class="dig">0</span>
 
 <span class="kw">def</span> selectAllAndOpenProject():
-    <span class="skw">click</span>(Pattern(<img src="Flair3DLogoInTheApp.png" />).targetOffset(<span class="dig">280</span>,<span class="dig">315</span>)) <span class="cmt"># Click on Select All Checkbox</span>
-    <span class="skw">click</span>(Pattern(<img src="Flair3DLogoInTheApp.png" />).targetOffset(<span class="dig">425</span>,<span class="dig">370</span>)) <span class="cmt"># Click on a file to open the project</span>
-    <span class="skw">wait</span>(<img src="ModelsAreReadyMsg.png" />, <span class="dig">30</span>) <span class="cmt"># wait for the AEC data load completion</span>
-    <span class="skw">click</span>(Pattern(<img src="ModelsAreReadyMsg.png" />).targetOffset(<span class="dig">145</span>,<span class="dig">0</span>), <span class="dig">30</span>)
+    <span class="skw">click</span>(getFlair3DLogoInTheApp().targetOffset(<span class="dig">280</span>,<span class="dig">338</span>)) <span class="cmt"># Click on Select All Checkbox</span>
+    <span class="skw">click</span>(getFlair3DLogoInTheApp().targetOffset(<span class="dig">515</span>,<span class="dig">390</span>)) <span class="cmt"># Click on a file to open the project</span>
+    <span class="skw">wait</span>(<img src="modelsAreReadyMessage.png" />, <span class="dig">30</span>) <span class="cmt"># wait for the AEC data load completion</span>
+    <span class="skw">click</span>(Pattern(<img src="modelsAreReadyMessage.png" />).targetOffset(<span class="dig">90</span>,<span class="dig">0</span>))
     Debug.log(<span class="str">"INFO: Models should be ready for search now."</span>)
 
 <span class="kw">def</span> clickOnViewHome():

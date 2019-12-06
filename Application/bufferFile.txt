@@ -1,8 +1,54 @@
-Running D:\GetTech\FlairSikuliTests\FlairTestBed\ZZZFlairCloseApp.sikuli
+Running D:\GetTech\FlairSikuliTests\FlairTestBed\UploadFromDisk.sikuli
 +++ running this Java
 +++ trying to run SikuliX
-+++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\FlairSikuliTests\Sikuli Build\sikulix.jar -r "D:\GetTech\FlairSikuliTests\FlairTestBed\ZZZFlairCloseApp.sikuli"
-[debug] TEST PASSED!!
++++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\FlairSikuliTests\Sikuli Build\sikulix.jar -r "D:\GetTech\FlairSikuliTests\FlairTestBed\UploadFromDisk.sikuli"
+[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1517,172)@S(0)[0,0 1920x1080]
+[log] CLICK on L(362,177)@S(0)[0,0 1920x1080]
+[log]  TYPE "AutoTest"
+[log] CLICK on L(357,252)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1427,442)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1557,392)@S(0)[0,0 1920x1080]
+[log] CLICK on L(817,502)@S(0)[0,0 1920x1080]
+INFO: It is assumed that the file is there at C:\FlairAutoTestsSamples\Automation_Upload_Test_Sample.stl
+[log]  TYPE "C:\FlairAutoTestsSamples\Automation_Upload_Test_Sample.stl"
+[log]  TYPE "#ENTER."
+LOG: Clicking on select category dropdown
+[log] CLICK on L(772,528)@S(0)[0,0 1920x1080]
+[log] CLICK on L(772,603)@S(0)[0,0 1920x1080]
+[log] CLICK on L(772,578)@S(0)[0,0 1920x1080]
+[log] Meta+Shift+CLICK on L(1865,162)@S(0)[0,0 1920x1080]
+LOG: clicking at an interval of 2 seconds
+[log] CLICK on L(607,492)@S(0)[0,0 1920x1080]
+LOG: Waiting for 2 seconds for model to open
+[log] CLICK on L(607,492)@S(0)[0,0 1920x1080]
+LOG: Waiting for 4 seconds for model to open
+INFO: Project upload seems to be working fine! Now let's check delete.
+[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
+[log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
+[log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
+[log]  TYPE "AutoTest"
+[log] CLICK on L(957,422)@S(0)[0,0 1920x1080]
+INFO: Going inside the project.
+INFO: No project found of the name %s AutoTest
+[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1772,102)@S(0)[0,0 1920x1080]
+INFO: Assumed that the first project will be the latest one. So deleting it.
+[log] CLICK on L(362,247)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1547,177)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1040,620)@S(0)[0,0 1920x1080]
+[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
+[log]  TYPE "#F5."
+[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
+[log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
+[log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
+[log]  TYPE "AutoTest"
+[error] script [ D:\GetTech\FlairSikuliTests\FlairTestBed\UploadFromDisk.sikuli ] stopped with error in line 117
+[error] AssertionError ( INFO: Project seems to be still there on dashboard after even deleting. )
+[error] --- Traceback --- error source first
+line: module ( function ) statement 
+112: main (  deleteAllTheModelsInProject )     assert 0, "INFO: Project seems to be still there on dashboard after even deleting."
+[error] --- Traceback --- end --------------
 ++++++++++++++++++++++++++++++++ 
 
  
