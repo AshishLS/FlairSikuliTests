@@ -76,18 +76,19 @@
 
 ifLogin = <span class="dig">0</span>
 ifCloseChrome = <span class="dig">0</span>
+projectName = <span class="str">"Admin Building For Auto Testing"</span>
 
 <span class="kw">if</span>(ifLogin):
     module_CommonResource.openChrome()
     module_CommonResource.openFlair3DAndLogin()
 
 <span class="cmt"># After signing in
-</span>module_CommonResource.searchForProjectAndOpen(<span class="str">"pilot Project"</span>)
+</span>module_CommonResource.searchForProjectAndOpen(projectName)
 module_CommonResource.selectAllAndOpenProject()
 module_CommonResource.clickOnViewHome()
 
 <span class="kw">def</span> checkSearchByComponentName():
-    <span class="kw">assert</span> exists(<img src="FullAirportTerminalLoaded.png" />), <span class="str">"ERROR: looks Like Model is not loaded correctly"</span>
+    <span class="kw">assert</span> exists(<img src="AdminBuildingFullView.png" />), <span class="str">"ERROR: looks Like Model is not loaded correctly"</span>
     <span class="kw">print</span> <span class="str">"INFO: Model is loaded correctly. Switching to Search tab"</span>
     <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">175</span>,<span class="dig">55</span>)) <span class="cmt"># Click on search tab</span>
 
@@ -98,20 +99,21 @@ module_CommonResource.clickOnViewHome()
     <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">0</span>,<span class="dig">255</span>)) <span class="cmt"># Click in the search tex box</span>
     <span class="kw">print</span> <span class="str">"LOG: Clicked inside the Search Textbox"</span>
 
-    <span class="skw">type</span>(<span class="str">"Gate counter - 2"</span>)
+    <span class="skw">type</span>(<span class="str">"Basic Roof"</span>)
 
     <span class="kw">print</span> <span class="str">"LOG: Clicking the Search button"</span>
     <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">10</span>,<span class="dig">335</span>)) <span class="cmt"># Click on Fit To view checkBox</span>
 
     <span class="kw">print</span> <span class="str">"LOG: Check whether any result appears"</span>
-    <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="SearchResults.png" />, <span class="dig">10</span>), <span class="str">"ERROR: No or incorrect serach result appeared"</span>
+    <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="BasicRoofSearchResult.png" />, <span class="dig">10</span>), <span class="str">"ERROR: No or incorrect serach result appeared"</span>
     <span class="kw">print</span> <span class="str">"LOG: Check the Fit To View checkbox"</span>
-    <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">135</span>,<span class="dig">425</span>)) <span class="cmt"># Click on Fit To view checkBox</span>
+    <span class="kw">if</span> module_CommonResource.region_leftPanel.exists(Pattern(<img src="FitToViewCheckBox.png" />).similar(<span class="dig">0.90</span>)):
+        <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">135</span>,<span class="dig">425</span>)) <span class="cmt"># Click on Fit To view checkBox</span>
 
-    <span class="kw">print</span> <span class="str">"LOG: Click on the first result"</span>
-    <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">40</span>,<span class="dig">620</span>))
+    <span class="kw">print</span> <span class="str">"LOG: Click on the second result - Basic Roof [615290]"</span>
+    <span class="skw">click</span>(Pattern(<img src="BasicRoofSearchResult.png" />).targetOffset(-<span class="dig">30</span>,<span class="dig">35</span>))
 
-    <span class="kw">assert</span> exists(<img src="1574349626978.png" />, <span class="dig">2</span>), <span class="str">"ERROR: Incorrect Search result or Fit To View didn't work"</span>
+    <span class="kw">assert</span> exists(<img src="BasicRoofSearchObjectFit.png" />, <span class="dig">2</span>), <span class="str">"ERROR: Incorrect Search result or Fit To View didn't work"</span>
 
     <span class="kw">print</span> <span class="str">"INFO: Search By Component Name worked fine. Exiting Test."</span>
 

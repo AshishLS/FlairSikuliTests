@@ -6,8 +6,9 @@ ifLogin = 0
 ifCloseChrome = 0
 
 if(ifLogin):
+    link = module_CommonResource.selectDevOrProd()
     module_CommonResource.openChrome()
-    module_CommonResource.openFlair3DAndLogin()
+    module_CommonResource.openFlair3DAndLogin(link)
 
 def createNewProject(projectName, modelPath):
     # Make sure we are on the dashboard
@@ -28,8 +29,8 @@ def createNewProject(projectName, modelPath):
     # Click on upload new file icon
     click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(1465,290))
         
-    # New popup dialog should appear. Click on "Select From Computer" button.
-    click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(725,400))
+    print "LOG: New popup dialog should appear. Click on 'Select From Computer' button."
+    click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(725,350))
     # Select the file stored on the path.
     print "INFO: It is assumed that the file is there at %s" % modelPath
     wait(2) # wait for file open dialog to appear.

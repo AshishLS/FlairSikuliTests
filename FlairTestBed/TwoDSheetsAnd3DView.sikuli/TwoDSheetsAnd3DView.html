@@ -1,0 +1,118 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>TwoDSheetsAnd3DView.sikuli</h2> <a href="TwoDSheetsAnd3DView.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> os
+<span class="kw">import</span> sys
+<span class="kw">import</span> module_CommonResource
+
+ifLogin = <span class="dig">0</span>
+ifCloseChrome = <span class="dig">0</span>
+projectName = <span class="str">"Admin Building For Auto Testing"</span>
+
+<span class="kw">if</span>(ifLogin):
+    link = module_CommonResource.selectDevOrProd()
+    module_CommonResource.openChrome()
+    module_CommonResource.openFlair3DAndLogin(link)
+
+<span class="cmt"># After signing in
+</span>module_CommonResource.searchForProjectAndOpen(projectName)
+module_CommonResource.selectAllAndOpenProject()
+module_CommonResource.clickOnViewHome()
+
+<span class="kw">def</span> check2DViewsAreOkay():
+
+    <span class="kw">assert</span> exists(<img src="AdminBuildingFullView.png" />), <span class="str">"ERROR: looks Like Model is not loaded correctly"</span>
+    <span class="kw">print</span> (<span class="str">"LOG: Click on the show 2D view radio button"</span>)
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">65</span>,<span class="dig">135</span>))
+    <span class="kw">print</span> (<span class="str">"LOG: Check if the first sheet looks okay."</span>)
+    <span class="kw">assert</span> exists(<img src="FirstSheetBottom.png" />), <span class="str">"ERROR: 1st sheet doesn't look okay"</span>
+    <span class="kw">print</span> (<span class="str">"LOG: 2D Sheets should show up in the left panel"</span>)
+    <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="SheetList.png" />), <span class="str">"ERROR: 2D sheets list not visible"</span>
+
+    rdoButton1st2DsheetLocation = Location(-<span class="dig">65</span>,<span class="dig">265</span>) <span class="cmt"># Offset from the FlairLogo</span>
+    <span class="kw">print</span> (<span class="str">"LOG: Hovering over the first sheet name should display tooltip of Arc model name"</span>)
+    module_CommonResource.region_leftPanel.hover(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(rdoButton1st2DsheetLocation.getX(),rdoButton1st2DsheetLocation.getY()))
+    <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="ModelNameOnHover.png" />), <span class="str">"ERROR: Tooltip not visible when hovered over the sheet name"</span>
+
+    <span class="kw">print</span> (<span class="str">"LOG: Check if the 4th Sheet is okay"</span>)
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(rdoButton1st2DsheetLocation.getX(),rdoButton1st2DsheetLocation.getY()+<span class="dig">125</span>))
+    <span class="kw">assert</span> exists(<img src="FourtSheetRightTop.png" />, <span class="dig">5</span>), <span class="str">"ERROR: 1st sheet doesn't look okay"</span>
+
+    Debug.log(<span class="str">"INFO: Looks like 2D Sheets are fine."</span>)
+
+check2DViewsAreOkay()
+<span class="kw">if</span>(ifCloseChrome):
+    module_CommonResource.closeChrome()
+Debug.log(<span class="str">"TEST PASSED!!"</span>)
+</pre>
+</body>
+</html>

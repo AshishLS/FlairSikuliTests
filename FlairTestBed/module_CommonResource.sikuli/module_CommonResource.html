@@ -88,6 +88,7 @@ incognitoChromeLeftCorner = <img src="incognitoChromeLeftCorner.png" />
 
 old_flair3DLogoInTheApp = <img src="old_flair3DLogoInTheApp.png" />
 flair3DLogoInTheApp = <img src="Flair3DLogoInTheApp.png" />
+
 <span class="kw">def</span> getFlair3DLogoInTheApp():
     <span class="kw">return</span> Pattern(flair3DLogoInTheApp).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
 
@@ -106,6 +107,15 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
     keyDown(Key.DELETE)
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
 
+<span class="kw">def</span> selectDevOrProd():
+    link = <span class="str">"https://dev-app.flair3d.com"</span> <span class="cmt"># Default dev</span>
+    <span class="cmt"># Get input from user whether to check on production or dev
+</span>    items = (<span class="str">"dev"</span>, <span class="str">"prod"</span>)
+    selected = select(<span class="str">"Please select environment to run the test on"</span>, options = items)
+    <span class="kw">if</span> selected == items[<span class="dig">1</span>]:
+        link = <span class="str">"https://app.flair3d.com"</span>
+    <span class="kw">return</span> link
+
 <span class="kw">def</span> openChrome():
     <span class="cmt"># Open Chrome
 </span>    keyDown(Key.WIN)
@@ -117,7 +127,7 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
     <span class="skw">type</span>(Key.ENTER)
     <span class="skw">wait</span>(<span class="dig">1</span>)
     <span class="cmt"># Maximize the window if it's not already
-</span>    <span class="cmt">#rightClick(getChromeLeftCorner().targetOffset(350,-15))
+</span>    <span class="cmt"># rightClick(getChromeLeftCorner().targetOffset(350,-15))
 </span>    <span class="skw">rightClick</span>(getIncognitoChromeLeftCorner().targetOffset(<span class="dig">350</span>,-<span class="dig">15</span>))
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="cmt">#click(getChromeLeftCorner().targetOffset(400,90)) # Click on maximize
@@ -143,10 +153,11 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
         <span class="skw">click</span>(Pattern(<img src="SignOutMessageBox.png" />).targetOffset(-<span class="dig">50</span>,<span class="dig">65</span>))
     <span class="skw">wait</span>(<span class="dig">2</span>)
 
-<span class="kw">def</span> openFlair3DAndLogin():
+<span class="kw">def</span> openFlair3DAndLogin(link):
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="cmt"># Open flair3D and login
-</span>    paste(<span class="str">"https://dev-app.flair3d.com"</span>)
+</span>    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    paste(link)
     <span class="skw">wait</span>(<span class="dig">1</span>)
     <span class="skw">type</span>(Key.ENTER)
     <span class="kw">if</span> exists(getFlair3DLogoInTheApp(), <span class="dig">3</span>):
@@ -160,7 +171,7 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
     <span class="skw">type</span>(<span class="str">"winCCTECH@85"</span>)
     <span class="skw">click</span>(Pattern(<img src="FlairLoginScreen.png" />).targetOffset(-<span class="dig">10</span>,<span class="dig">190</span>))
     Debug.log(<span class="str">"INFO: Successfully logged in"</span>)
-    <span class="kw">assert</span> exists(getFlair3DLogoInTheApp(), <span class="dig">2</span>)
+    <span class="kw">assert</span> exists(getFlair3DLogoInTheApp(), <span class="dig">4</span>)
     <span class="skw">wait</span>(<span class="dig">2</span>)
 
 <span class="kw">def</span> searchProjectByName(projectName):

@@ -74,8 +74,10 @@
 <span class="kw">import</span> sys
 <span class="kw">import</span> module_CommonResource
 
+<span class="kw">print</span> <span class="str">"LOG: Start of the test suite"</span>
+link = module_CommonResource.selectDevOrProd()
 module_CommonResource.openChrome()
-module_CommonResource.openFlair3DAndLogin()
+module_CommonResource.openFlair3DAndLogin(link)
 Debug.log(<span class="str">"TEST PASSED!!"</span>)
 </pre>
 </body>

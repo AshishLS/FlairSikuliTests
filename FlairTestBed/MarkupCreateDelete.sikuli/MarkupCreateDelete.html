@@ -76,13 +76,15 @@
 
 ifLogin = <span class="dig">0</span>
 ifCloseChrome = <span class="dig">0</span>
+projectName = <span class="str">"Admin Building For Auto Testing"</span>
 
 <span class="kw">if</span>(ifLogin):
+    link = module_CommonResource.selectDevOrProd()
     module_CommonResource.openChrome()
-    module_CommonResource.openFlair3DAndLogin()
+    module_CommonResource.openFlair3DAndLogin(link)
 
 <span class="cmt"># After signing in
-</span>module_CommonResource.searchForProjectAndOpen(<span class="str">"pilot Project"</span>)
+</span>module_CommonResource.searchForProjectAndOpen(projectName)
 module_CommonResource.selectAllAndOpenProject()
 module_CommonResource.clickOnViewHome()
 
@@ -91,29 +93,39 @@ module_CommonResource.clickOnViewHome()
 </span>    bottomToolBarFirstSection = Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
     <span class="cmt"># doubleClick on roof to zoom to it
 </span>    <span class="skw">doubleClick</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">80</span>,-<span class="dig">330</span>))
-    <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(-<span class="dig">140</span>,-<span class="dig">70</span>)) <span class="cmt"># click outside to unselect</span>
+    <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(-<span class="dig">430</span>,<span class="dig">10</span>)) <span class="cmt"># click outside to unselect</span>
     <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">530</span>,<span class="dig">0</span>)) <span class="cmt"># click on markup button</span>
     <span class="cmt"># Check if the markup window opens up
 </span>    <span class="kw">assert</span> exists(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markup dialog isn't visible."</span>
+
+
+    dropdownPosition = <span class="skw">find</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">55</span>,-<span class="dig">85</span>)).getTarget()
+    cloudMarkupOptionPosition = <span class="skw">find</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">70</span>,-<span class="dig">10</span>)).getTarget()
+    markUpNameTextBoxPosition = <span class="skw">find</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(-<span class="dig">115</span>,<span class="dig">25</span>)).getTarget()
+    saveButtonPosition = <span class="skw">find</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">95</span>,<span class="dig">25</span>)).getTarget()
+    closeButtonPosition = <span class="skw">find</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">130</span>,-<span class="dig">130</span>)).getTarget()
+    circleMarkupOptionPosition = <span class="skw">find</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">65</span>,-<span class="dig">125</span>)).getTarget()
+
     <span class="cmt"># Enable the edit mode.
 </span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(-<span class="dig">85</span>,-<span class="dig">85</span>))
-    <span class="cmt"># Select cloud markup
-</span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">55</span>,-<span class="dig">85</span>))
-    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">70</span>,-<span class="dig">10</span>))
+    <span class="cmt"># Select dropdown
+</span>    <span class="skw">click</span>(dropdownPosition)
+    <span class="kw">print</span> <span class="str">"LOG: Selecting the cloud markup"</span>
+    <span class="skw">click</span>(cloudMarkupOptionPosition)
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
 
     drawLocation = module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">775</span>, <span class="dig">725</span>).getTargetOffset()
     <span class="skw">dragDrop</span>(drawLocation, Location(drawLocation.getX() + <span class="dig">200</span>, drawLocation.getY() + <span class="dig">100</span>))
 
     <span class="cmt"># add a markup name and save
-</span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(-<span class="dig">115</span>,<span class="dig">25</span>)) <span class="cmt"># editable textbox</span>
-    <span class="kw">assert</span> exists(Pattern(<img src="cloudMarkupCorner.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Cloud markup messed while drawing"</span>
-    paste(<span class="str">"Protruding Beams"</span>)
-    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">95</span>,<span class="dig">25</span>)) <span class="cmt"># save</span>
+</span>    <span class="skw">click</span>(markUpNameTextBoxPosition) <span class="cmt"># editable textbox</span>
+    <span class="kw">assert</span> exists(<img src="CloudMarkup.png" />), <span class="str">"ERROR: Cloud markup messed while drawing"</span>
+    paste(<span class="str">"Accessible Ramp"</span>)
+    <span class="skw">click</span>(saveButtonPosition) <span class="cmt"># save</span>
     <span class="cmt"># close the markup saved message
 </span>    module_CommonResource.closeThePopupMessages()
 
-    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">130</span>,-<span class="dig">130</span>)) <span class="cmt"># close markup</span>
+    <span class="skw">click</span>(closeButtonPosition) <span class="cmt"># close markup</span>
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="cmt"># click on forge view home
 </span>    module_CommonResource.clickOnViewHome()
@@ -122,19 +134,21 @@ module_CommonResource.clickOnViewHome()
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
 
     <span class="cmt"># new markup a circle perhaps.
-</span>    <span class="cmt"># doubleClick on mid section to zoom to it
+</span>    <span class="kw">print</span> (<span class="str">"LOG: Start with the Circle Markup now"</span>)
+    <span class="cmt"># doubleClick on mid section to zoom to it
 </span>    <span class="skw">doubleClick</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">285</span>,-<span class="dig">455</span>))
     <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(-<span class="dig">140</span>,-<span class="dig">70</span>)) <span class="cmt"># click outside to unselect</span>
 
     <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">530</span>,<span class="dig">0</span>)) <span class="cmt"># click on markup button</span>
     <span class="cmt"># Check if the markup window opens up
 </span>    <span class="kw">assert</span> exists(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markup dialog isn't visible."</span>
+
     <span class="cmt"># Enable the edit mode.
 </span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(-<span class="dig">85</span>,-<span class="dig">85</span>))
     <span class="cmt"># Select new markup
-</span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">55</span>,-<span class="dig">85</span>))
+</span>    <span class="skw">click</span>(dropdownPosition)
     <span class="cmt"># Select circle markup
-</span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">65</span>,-<span class="dig">125</span>))
+</span>    <span class="skw">click</span>(circleMarkupOptionPosition)
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
 
     drawLocation = module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">1350</span>, <span class="dig">225</span>).getTargetOffset()
@@ -143,24 +157,25 @@ module_CommonResource.clickOnViewHome()
     <span class="skw">dragDrop</span>(drawLocation, Location(drawLocation.getX() + <span class="dig">100</span>, drawLocation.getY() + <span class="dig">100</span>)) <span class="cmt"># draw two so that we can easily identify</span>
 
     <span class="cmt"># add a markup name and save
-</span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(-<span class="dig">115</span>,<span class="dig">25</span>)) <span class="cmt"># editable textbox</span>
-    <span class="kw">assert</span> exists(Pattern(<img src="CirlceMarkup.png" />).similar(<span class="dig">0.80</span>)), <span class="str">"ERROR: Circle markup messed while drawing"</span>
-    paste(<span class="str">"Middle Road"</span>)
-    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">95</span>,<span class="dig">25</span>)) <span class="cmt"># save</span>
+</span>
+    <span class="skw">click</span>(markUpNameTextBoxPosition) <span class="cmt"># editable textbox</span>
+    <span class="kw">assert</span> exists(<img src="CircleMarkups.png" />), <span class="str">"ERROR: Circle markup messed while drawing"</span>
+    paste(<span class="str">"Roof Panel Position"</span>)
+    <span class="skw">click</span>(saveButtonPosition) <span class="cmt"># save</span>
     <span class="cmt"># close the markup saved message
 </span>    module_CommonResource.closeThePopupMessages()
 
-    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">130</span>,-<span class="dig">130</span>)) <span class="cmt"># close markup</span>
+    <span class="skw">click</span>(closeButtonPosition) <span class="cmt"># close markup</span>
 
     <span class="cmt"># Check if both the markups are saved properly
 </span>    <span class="kw">def</span> checkMarkupsAreSavedCorrectly():
         <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">530</span>,<span class="dig">0</span>)) <span class="cmt"># click on markup button</span>
-        <span class="kw">assert</span> exists(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markups are not shown in the UI"</span>
+        <span class="kw">assert</span> exists(Pattern(<img src="TwoMarkupEntries.png" />).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)), <span class="str">"ERROR: Markups are not shown in the UI"</span>
         <span class="cmt"># click on 1st markup and check if the view shows it appropriately
-</span>        <span class="skw">click</span>(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(-<span class="dig">85</span>,-<span class="dig">20</span>)) <span class="cmt"># select 1st cloud markup</span>
-        <span class="kw">assert</span> exists(Pattern(<img src="cloudMarkupCorner.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Something wrong with the 1st cloud Markup"</span>
-        <span class="skw">click</span>(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(-<span class="dig">85</span>,<span class="dig">20</span>)) <span class="cmt"># select second markup</span>
-        <span class="kw">assert</span> exists(Pattern(<img src="CirlceMarkup.png" />).similar(<span class="dig">0.80</span>)), <span class="str">"ERROR: Something wrong with the 1st Markup"</span>
+</span>        <span class="skw">click</span>(Pattern(<img src="TwoMarkupEntries.png" />).targetOffset(-<span class="dig">85</span>,-<span class="dig">20</span>)) <span class="cmt"># select 1st cloud markup</span>
+        <span class="kw">assert</span> exists((<img src="CloudMarkup.png" />)), <span class="str">"ERROR: Something wrong with the 1st cloud Markup"</span>
+        <span class="skw">click</span>(Pattern(<img src="TwoMarkupEntries.png" />).targetOffset(-<span class="dig">85</span>,<span class="dig">20</span>)) <span class="cmt"># select second markup</span>
+        <span class="kw">assert</span> exists(<img src="CircleMarkups.png" />), <span class="str">"ERROR: Something wrong with the 1st Markup"</span>
 
     checkMarkupsAreSavedCorrectly()
     <span class="kw">print</span> (<span class="str">"INFO: Both markups seems correct. In the same session. Let's check for different session."</span>)
@@ -170,7 +185,7 @@ module_CommonResource.clickOnViewHome()
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="skw">type</span>(Key.F5) <span class="cmt"># Refresh the page</span>
     <span class="skw">wait</span>(<span class="dig">2</span>)
-    module_CommonResource.searchForProjectAndOpen(<span class="str">"pilot Project"</span>)
+    module_CommonResource.searchForProjectAndOpen(projectName)
     module_CommonResource.selectAllAndOpenProject()
 
     <span class="cmt"># Now check if the markups are showing up in this session
@@ -178,17 +193,22 @@ module_CommonResource.clickOnViewHome()
     <span class="kw">print</span> (<span class="str">"INFO: Both markups seems correct in this session as well. Let's proceed to delete"</span>)
 
     <span class="cmt"># delete the markups.
-</span>
-    <span class="skw">click</span>(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(<span class="dig">100</span>,-<span class="dig">20</span>)) <span class="cmt"># delete first markup</span>
+</span>    deleteFirstMarkupPosition = <span class="skw">find</span>(Pattern(<img src="TwoMarkupEntries.png" />).targetOffset(<span class="dig">115</span>,-<span class="dig">15</span>)).getTarget()
+
+    <span class="skw">click</span>(deleteFirstMarkupPosition) <span class="cmt"># delete first markup</span>
     <span class="skw">click</span>(Pattern(<img src="MarkupDeleteConfirmation.png" />).targetOffset(<span class="dig">35</span>,<span class="dig">60</span>)) <span class="cmt"># confirm delete</span>
-    <span class="skw">click</span>(Pattern(<img src="twoMarkupEntries.png" />).targetOffset(<span class="dig">100</span>,-<span class="dig">20</span>)) <span class="cmt"># delete second markup</span>
+    <span class="kw">print</span> <span class="str">"LOG: Now deleteing the remaining markup which should be at the place of 1st"</span>
+    <span class="skw">click</span>(deleteFirstMarkupPosition) <span class="cmt"># delete second markup</span>
     <span class="skw">click</span>(Pattern(<img src="MarkupDeleteConfirmation.png" />).targetOffset(<span class="dig">35</span>,<span class="dig">60</span>)) <span class="cmt"># confirm delete</span>
 
-    <span class="kw">assert</span> <span class="kw">not</span> exists (Pattern(<img src="twoMarkupEntries.png" />).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markups are still showing in the UI"</span>
+    <span class="kw">assert</span> <span class="kw">not</span> exists (Pattern(<img src="TwoMarkupEntries.png" />).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markups are still showing in the UI"</span>
 
     <span class="cmt"># Prepare to close.
-</span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">130</span>,-<span class="dig">130</span>)) <span class="cmt"># close markup</span>
+</span>    <span class="skw">click</span>(closeButtonPosition) <span class="cmt"># close markup</span>
 
+<span class="cmt"># First expand the models."1577200523998.png"
+</span><span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">80</span>, <span class="dig">230</span>))
+<span class="skw">wait</span>(<span class="dig">0.5</span>)
 checkMarkupWorkflow()
 
 <span class="kw">if</span>(ifCloseChrome):

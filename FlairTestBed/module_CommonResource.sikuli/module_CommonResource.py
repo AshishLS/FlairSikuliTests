@@ -16,6 +16,7 @@ def getIncognitoChromeLeftCorner():
 
 old_flair3DLogoInTheApp = "old_flair3DLogoInTheApp.png"
 flair3DLogoInTheApp = "Flair3DLogoInTheApp.png"
+
 def getFlair3DLogoInTheApp(): 
     return Pattern(flair3DLogoInTheApp).similar(0.90).targetOffset(0,1)
 
@@ -34,6 +35,15 @@ def removePreExistingText():
     keyDown(Key.DELETE)
     wait(0.5)
 
+def selectDevOrProd():
+    link = "https://dev-app.flair3d.com" # Default dev
+    # Get input from user whether to check on production or dev
+    items = ("dev", "prod")
+    selected = select("Please select environment to run the test on", options = items)
+    if selected == items[1]:
+        link = "https://app.flair3d.com"
+    return link
+
 def openChrome():
     # Open Chrome
     keyDown(Key.WIN)
@@ -45,7 +55,7 @@ def openChrome():
     type(Key.ENTER)
     wait(1)
     # Maximize the window if it's not already
-    #rightClick(getChromeLeftCorner().targetOffset(350,-15))
+    # rightClick(getChromeLeftCorner().targetOffset(350,-15))
     rightClick(getIncognitoChromeLeftCorner().targetOffset(350,-15))
     wait(0.5)
     #click(getChromeLeftCorner().targetOffset(400,90)) # Click on maximize
@@ -71,10 +81,11 @@ def logoutFromExistingAccount():
         click(Pattern("SignOutMessageBox.png").targetOffset(-50,65))
     wait(2)
 
-def openFlair3DAndLogin():
-    wait(0.5)        
+def openFlair3DAndLogin(link):
+    wait(0.5)
     # Open flair3D and login
-    paste("https://dev-app.flair3d.com")
+    wait(0.5)
+    paste(link)
     wait(1)
     type(Key.ENTER)
     if exists(getFlair3DLogoInTheApp(), 3):
@@ -88,7 +99,7 @@ def openFlair3DAndLogin():
     type("winCCTECH@85")
     click(Pattern("FlairLoginScreen.png").targetOffset(-10,190))
     Debug.log("INFO: Successfully logged in")
-    assert exists(getFlair3DLogoInTheApp(), 2)
+    assert exists(getFlair3DLogoInTheApp(), 4)
     wait(2)
 
 def searchProjectByName(projectName):

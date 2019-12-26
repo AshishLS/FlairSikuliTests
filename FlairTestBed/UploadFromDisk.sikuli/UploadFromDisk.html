@@ -78,8 +78,9 @@ ifLogin = <span class="dig">0</span>
 ifCloseChrome = <span class="dig">0</span>
 
 <span class="kw">if</span>(ifLogin):
+    link = module_CommonResource.selectDevOrProd()
     module_CommonResource.openChrome()
-    module_CommonResource.openFlair3DAndLogin()
+    module_CommonResource.openFlair3DAndLogin(link)
 
 <span class="kw">def</span> createNewProject(projectName, modelPath):
     <span class="cmt"># Make sure we are on the dashboard
@@ -100,8 +101,8 @@ ifCloseChrome = <span class="dig">0</span>
     <span class="cmt"># Click on upload new file icon
 </span>    <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">1465</span>,<span class="dig">290</span>))
 
-    <span class="cmt"># New popup dialog should appear. Click on "Select From Computer" button.
-</span>    <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">725</span>,<span class="dig">400</span>))
+    <span class="kw">print</span> <span class="str">"LOG: New popup dialog should appear. Click on 'Select From Computer' button."</span>
+    <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">725</span>,<span class="dig">350</span>))
     <span class="cmt"># Select the file stored on the path.
 </span>    <span class="kw">print</span> <span class="str">"INFO: It is assumed that the file is there at %s"</span> % modelPath
     <span class="skw">wait</span>(<span class="dig">2</span>) <span class="cmt"># wait for file open dialog to appear.</span>
