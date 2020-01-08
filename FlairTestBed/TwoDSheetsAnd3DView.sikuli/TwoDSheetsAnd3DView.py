@@ -26,14 +26,16 @@ def check2DViewsAreOkay():
     print ("LOG: 2D Sheets should show up in the left panel")
     assert module_CommonResource.region_leftPanel.exists("SheetList.png"), "ERROR: 2D sheets list not visible"
 
-    rdoButton1st2DsheetLocation = Location(-65,265) # Offset from the FlairLogo
-    print ("LOG: Hovering over the first sheet name should display tooltip of Arc model name")
-    module_CommonResource.region_leftPanel.hover(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(rdoButton1st2DsheetLocation.getX(),rdoButton1st2DsheetLocation.getY()))
-    assert module_CommonResource.region_leftPanel.exists("ModelNameOnHover.png"), "ERROR: Tooltip not visible when hovered over the sheet name"
-    
-    print ("LOG: Check if the 4th Sheet is okay")
-    module_CommonResource.region_leftPanel.click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(rdoButton1st2DsheetLocation.getX(),rdoButton1st2DsheetLocation.getY()+125))
-    assert exists("FourtSheetRightTop.png", 5), "ERROR: 1st sheet doesn't look okay"
+    rdoButton1st2DsheetLocation = Location(-40,370) # Offset from the FlairLogo
+    print ("LOG: Check if the 2nd Sheet of 1st Model (ARCH) is okay")
+    module_CommonResource.region_leftPanel.click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(rdoButton1st2DsheetLocation.getX(),rdoButton1st2DsheetLocation.getY()+45))
+    assert exists("FourtSheetRightTop.png", 5), "ERROR: 2nd sheet doesn't look okay"
+
+    print ("LOG: Check if the 1st sheet in second model (STR) is okay. Click on the expand button")
+    module_CommonResource.region_leftPanel.click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(230,510))
+    print ("LOG: click on the 000- Cover model")
+    module_CommonResource.region_leftPanel.click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-40,460))
+    assert exists("FirstSheetBottom.png"), "ERROR: 2nd sheet doesn't look okay"
 
     Debug.log("INFO: Looks like 2D Sheets are fine.")
 

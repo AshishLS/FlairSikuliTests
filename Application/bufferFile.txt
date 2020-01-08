@@ -9,7 +9,8 @@ Running D:\GetTech\FlairSikuliTests\FlairTestBed\UploadFromDisk.sikuli
 [log] CLICK on L(357,252)@S(0)[0,0 1920x1080]
 [log] CLICK on L(1427,442)@S(0)[0,0 1920x1080]
 [log] CLICK on L(1557,392)@S(0)[0,0 1920x1080]
-[log] CLICK on L(817,502)@S(0)[0,0 1920x1080]
+LOG: New popup dialog should appear. Click on 'Select From Computer' button.
+[log] CLICK on L(817,452)@S(0)[0,0 1920x1080]
 INFO: It is assumed that the file is there at C:\FlairAutoTestsSamples\Automation_Upload_Test_Sample.stl
 [log]  TYPE "C:\FlairAutoTestsSamples\Automation_Upload_Test_Sample.stl"
 [log]  TYPE "#ENTER."
@@ -30,7 +31,10 @@ INFO: Project upload seems to be working fine! Now let's check delete.
 [log]  TYPE "AutoTest"
 [log] CLICK on L(957,422)@S(0)[0,0 1920x1080]
 INFO: Going inside the project.
-INFO: No project found of the name %s AutoTest
+INFO: Project view success.
+[log] CLICK on L(372,440)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1517,392)@S(0)[0,0 1920x1080]
+[log] Ctrl+CLICK on L(910,615)@S(0)[0,0 1920x1080]
 [log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
 [log] CLICK on L(1772,102)@S(0)[0,0 1920x1080]
 INFO: Assumed that the first project will be the latest one. So deleting it.
@@ -43,12 +47,8 @@ INFO: Assumed that the first project will be the latest one. So deleting it.
 [log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
 [log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
 [log]  TYPE "AutoTest"
-[error] script [ D:\GetTech\FlairSikuliTests\FlairTestBed\UploadFromDisk.sikuli ] stopped with error in line 117
-[error] AssertionError ( INFO: Project seems to be still there on dashboard after even deleting. )
-[error] --- Traceback --- error source first
-line: module ( function ) statement 
-112: main (  deleteAllTheModelsInProject )     assert 0, "INFO: Project seems to be still there on dashboard after even deleting."
-[error] --- Traceback --- end --------------
+INFO: Project has been successfully deleted.
+[debug] TEST PASSED!!
 ++++++++++++++++++++++++++++++++ 
 
  
