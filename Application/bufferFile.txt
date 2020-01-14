@@ -1,53 +1,41 @@
-Running D:\GetTech\FlairSikuliTests\FlairTestBed\UploadFromDisk.sikuli
+Running D:\GetTech\FlairSikuliTests\FlairTestBed\RegularWorkflows\FlairFirstTest.sikuli
 +++ running this Java
 +++ trying to run SikuliX
-+++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\FlairSikuliTests\Sikuli Build\sikulix.jar -r "D:\GetTech\FlairSikuliTests\FlairTestBed\UploadFromDisk.sikuli"
-[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1517,172)@S(0)[0,0 1920x1080]
-[log] CLICK on L(362,177)@S(0)[0,0 1920x1080]
-[log]  TYPE "AutoTest"
-[log] CLICK on L(357,252)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1427,442)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1557,392)@S(0)[0,0 1920x1080]
-LOG: New popup dialog should appear. Click on 'Select From Computer' button.
-[log] CLICK on L(817,452)@S(0)[0,0 1920x1080]
-INFO: It is assumed that the file is there at C:\FlairAutoTestsSamples\Automation_Upload_Test_Sample.stl
-[log]  TYPE "C:\FlairAutoTestsSamples\Automation_Upload_Test_Sample.stl"
-[log]  TYPE "#ENTER."
-LOG: Clicking on select category dropdown
-[log] CLICK on L(772,528)@S(0)[0,0 1920x1080]
-[log] CLICK on L(772,603)@S(0)[0,0 1920x1080]
-[log] CLICK on L(772,578)@S(0)[0,0 1920x1080]
-[log] Meta+Shift+CLICK on L(1865,162)@S(0)[0,0 1920x1080]
-LOG: clicking at an interval of 2 seconds
-[log] CLICK on L(607,492)@S(0)[0,0 1920x1080]
-LOG: Waiting for 2 seconds for model to open
-[log] CLICK on L(607,492)@S(0)[0,0 1920x1080]
-LOG: Waiting for 4 seconds for model to open
-INFO: Project upload seems to be working fine! Now let's check delete.
++++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\FlairSikuliTests\Sikuli Build\sikulix.jar -r "D:\GetTech\FlairSikuliTests\FlairTestBed\RegularWorkflows\FlairFirstTest.sikuli"
+LOG: Searching for project: Admin Building For Auto Testing 
 [log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
 [log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
 [log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
-[log]  TYPE "AutoTest"
+[log]  TYPE "Admin Building For Auto Testing"
+LOG: Opening project: Admin Building For Auto Testing 
 [log] CLICK on L(957,422)@S(0)[0,0 1920x1080]
 INFO: Going inside the project.
 INFO: Project view success.
 [log] CLICK on L(372,440)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1517,392)@S(0)[0,0 1920x1080]
-[log] Ctrl+CLICK on L(910,615)@S(0)[0,0 1920x1080]
-[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1772,102)@S(0)[0,0 1920x1080]
-INFO: Assumed that the first project will be the latest one. So deleting it.
-[log] CLICK on L(362,247)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1547,177)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1040,620)@S(0)[0,0 1920x1080]
-[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
-[log]  TYPE "#F5."
-[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
-[log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
-[log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
-[log]  TYPE "AutoTest"
-INFO: Project has been successfully deleted.
+[log] CLICK on L(607,492)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1864,160)@S(0)[0,0 1920x1080]
+[debug] INFO: Models should be ready for search now.
+[log] CLICK on L(1769,157)@S(0)[0,0 1920x1080]
+LOG: First Expand the All the models.
+[log] CLICK on L(12,332)@S(0)[0,0 1920x1080]
+[log] CLICK on L(32,332)@S(0)[0,0 1920x1080]
+LOG: Make everything visible again
+[log] CLICK on L(32,332)@S(0)[0,0 1920x1080]
+[log] CLICK on L(57,357)@S(0)[0,0 1920x1080]
+[log] CLICK on L(57,407)@S(0)[0,0 1920x1080]
+[log] CLICK on L(57,457)@S(0)[0,0 1920x1080]
+[log] CLICK on L(57,507)@S(0)[0,0 1920x1080]
+[log] CLICK on L(32,367)@S(0)[0,0 1920x1080]
+[log] CLICK on L(32,677)@S(0)[0,0 1920x1080]
+[log] CLICK on L(32,987)@S(0)[0,0 1920x1080]
+LOG: Click On select Arch model
+[log] CLICK on L(57,357)@S(0)[0,0 1920x1080]
+[error] Location: outside any screen (-35, 255) - subsequent actions might not work as expected
+L(-35,255)
+[log] CLICK on L(57,357)@S(0)[0,0 1920x1080]
+[log] CLICK on L(82,527)@S(0)[0,0 1920x1080]
+[log] CLICK on L(82,792)@S(0)[0,0 1920x1080]
+[debug] INFO: Looks like levels are fine.
 [debug] TEST PASSED!!
 ++++++++++++++++++++++++++++++++ 
 

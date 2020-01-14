@@ -20,6 +20,10 @@ flair3DLogoInTheApp = "Flair3DLogoInTheApp.png"
 def getFlair3DLogoInTheApp(): 
     return Pattern(flair3DLogoInTheApp).similar(0.90).targetOffset(0,1)
 
+loginScreenLogo = "LoginScreenLogo.png"
+def getloginScreenLogo(): 
+    return Pattern(loginScreenLogo).similar(0.90).targetOffset(0,1)
+
 modelsAreReadyMessage = "modelsAreReadyMessage.png"
 def getModelsAreReadyMessage(): 
     return Pattern(modelsAreReadyMessage).similar(0.90).targetOffset(0,1)
@@ -80,8 +84,12 @@ def logoutFromExistingAccount():
     if exists(Pattern("SignOutMessageBox.png"), 2):
         click(Pattern("SignOutMessageBox.png").targetOffset(-50,65))
     wait(2)
-
 def openFlair3DAndLogin(link):
+    username = "ashish.shete85@gmail.com"
+    pwd = "winCCTECH@85"
+    openFlair3DAndLoginForGivenUser(link, username, pwd)
+    
+def openFlair3DAndLoginForGivenUser(link, username, pwd):
     wait(0.5)
     # Open flair3D and login
     wait(0.5)
@@ -92,17 +100,44 @@ def openFlair3DAndLogin(link):
         logoutFromExistingAccount()
     assert exists("FlairLoginScreen.png", 4), "ERROR: Login screen is not visible"
     click(Pattern("FlairLoginScreen.png").targetOffset(-150,50))
+    wait(0.5)
     removePreExistingText()
     
-    type("ashish.shete85@gmail.com")
+    type(username)
     type(Key.TAB)
-    type("winCCTECH@85")
+    type(pwd)
     click(Pattern("FlairLoginScreen.png").targetOffset(-10,190))
     Debug.log("INFO: Successfully logged in")
-    assert exists(getFlair3DLogoInTheApp(), 4)
+    assert exists(getFlair3DLogoInTheApp(), 8)
     wait(2)
 
+def openFlair3DCreateNewUserAccount(link, username, pwd):
+    wait(0.5)
+    # Open flair3D and login
+    wait(0.5)
+    paste(link)
+    wait(1)
+    type(Key.ENTER)
+    if exists(getFlair3DLogoInTheApp(), 3):
+        logoutFromExistingAccount()
+    assert exists("FlairLoginScreen.png", 4), "ERROR: Login screen is not visible"
+    print "LOG: We want a new user account, so click on SignUp"
+    click(Pattern("FlairLoginScreen.png").targetOffset(60,225))
+    print "LOG: Click on the Email Field"
+    wait(1)
+    click(Pattern("NewSignUpScreen.png").targetOffset(-140,50))
+    removePreExistingText()
+    
+    type(username)
+    type(Key.TAB)
+    type(pwd)
+    print "LOG: Click on Sign up button"
+    click(getloginScreenLogo().targetOffset(0,440))
+    assert exists("VerificationEmailSentMessage.png",2), "ERROR: Verification email sent message doesn't see to have appeared."
+    wait(2)
+    
 def searchProjectByName(projectName):
+    print "LOG: Searching for project: %s " % projectName
     click(getFlair3DLogoInTheApp()) # Make sure you are at home page
     wait(0.5)
     click(getFlair3DLogoInTheApp().targetOffset(300,75))
@@ -114,7 +149,7 @@ def searchProjectByName(projectName):
 
 def searchForProjectAndOpen(projectName):
     searchProjectByName(projectName)
-    
+    print "LOG: Opening project: %s " % projectName
     click(getFlair3DLogoInTheApp().targetOffset(865,320)) # Click on the projectTile
     print "INFO: Going inside the project."
     # Check if we are inside the project description

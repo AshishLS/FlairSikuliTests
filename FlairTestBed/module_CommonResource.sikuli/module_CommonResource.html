@@ -92,6 +92,10 @@ flair3DLogoInTheApp = <img src="Flair3DLogoInTheApp.png" />
 <span class="kw">def</span> getFlair3DLogoInTheApp():
     <span class="kw">return</span> Pattern(flair3DLogoInTheApp).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
 
+loginScreenLogo = <img src="LoginScreenLogo.png" />
+<span class="kw">def</span> getloginScreenLogo():
+    <span class="kw">return</span> Pattern(loginScreenLogo).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
+
 modelsAreReadyMessage = <img src="modelsAreReadyMessage.png" />
 <span class="kw">def</span> getModelsAreReadyMessage():
     <span class="kw">return</span> Pattern(modelsAreReadyMessage).similar(<span class="dig">0.90</span>).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)
@@ -152,8 +156,12 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
     <span class="kw">if</span> exists(Pattern(<img src="SignOutMessageBox.png" />), <span class="dig">2</span>):
         <span class="skw">click</span>(Pattern(<img src="SignOutMessageBox.png" />).targetOffset(-<span class="dig">50</span>,<span class="dig">65</span>))
     <span class="skw">wait</span>(<span class="dig">2</span>)
-
 <span class="kw">def</span> openFlair3DAndLogin(link):
+    username = <span class="str">"ashish.shete85@gmail.com"</span>
+    pwd = <span class="str">"winCCTECH@85"</span>
+    openFlair3DAndLoginForGivenUser(link, username, pwd)
+
+<span class="kw">def</span> openFlair3DAndLoginForGivenUser(link, username, pwd):
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="cmt"># Open flair3D and login
 </span>    <span class="skw">wait</span>(<span class="dig">0.5</span>)
@@ -164,17 +172,44 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
         logoutFromExistingAccount()
     <span class="kw">assert</span> exists(<img src="FlairLoginScreen.png" />, <span class="dig">4</span>), <span class="str">"ERROR: Login screen is not visible"</span>
     <span class="skw">click</span>(Pattern(<img src="FlairLoginScreen.png" />).targetOffset(-<span class="dig">150</span>,<span class="dig">50</span>))
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
     removePreExistingText()
 
-    <span class="skw">type</span>(<span class="str">"ashish.shete85@gmail.com"</span>)
+    <span class="skw">type</span>(username)
     <span class="skw">type</span>(Key.TAB)
-    <span class="skw">type</span>(<span class="str">"winCCTECH@85"</span>)
+    <span class="skw">type</span>(pwd)
     <span class="skw">click</span>(Pattern(<img src="FlairLoginScreen.png" />).targetOffset(-<span class="dig">10</span>,<span class="dig">190</span>))
     Debug.log(<span class="str">"INFO: Successfully logged in"</span>)
-    <span class="kw">assert</span> exists(getFlair3DLogoInTheApp(), <span class="dig">4</span>)
+    <span class="kw">assert</span> exists(getFlair3DLogoInTheApp(), <span class="dig">8</span>)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> openFlair3DCreateNewUserAccount(link, username, pwd):
+    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    <span class="cmt"># Open flair3D and login
+</span>    <span class="skw">wait</span>(<span class="dig">0.5</span>)
+    paste(link)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="kw">if</span> exists(getFlair3DLogoInTheApp(), <span class="dig">3</span>):
+        logoutFromExistingAccount()
+    <span class="kw">assert</span> exists(<img src="FlairLoginScreen.png" />, <span class="dig">4</span>), <span class="str">"ERROR: Login screen is not visible"</span>
+    <span class="kw">print</span> <span class="str">"LOG: We want a new user account, so click on SignUp"</span>
+    <span class="skw">click</span>(Pattern(<img src="FlairLoginScreen.png" />).targetOffset(<span class="dig">60</span>,<span class="dig">225</span>))
+    <span class="kw">print</span> <span class="str">"LOG: Click on the Email Field"</span>
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="NewSignUpScreen.png" />).targetOffset(-<span class="dig">140</span>,<span class="dig">50</span>))
+    removePreExistingText()
+
+    <span class="skw">type</span>(username)
+    <span class="skw">type</span>(Key.TAB)
+    <span class="skw">type</span>(pwd)
+    <span class="kw">print</span> <span class="str">"LOG: Click on Sign up button"</span>
+    <span class="skw">click</span>(getloginScreenLogo().targetOffset(<span class="dig">0</span>,<span class="dig">440</span>))
+    <span class="kw">assert</span> exists(<img src="VerificationEmailSentMessage.png" />,<span class="dig">2</span>), <span class="str">"ERROR: Verification email sent message doesn't see to have appeared."</span>
     <span class="skw">wait</span>(<span class="dig">2</span>)
 
 <span class="kw">def</span> searchProjectByName(projectName):
+    <span class="kw">print</span> <span class="str">"LOG: Searching for project: %s "</span> % projectName
     <span class="skw">click</span>(getFlair3DLogoInTheApp()) <span class="cmt"># Make sure you are at home page</span>
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
     <span class="skw">click</span>(getFlair3DLogoInTheApp().targetOffset(<span class="dig">300</span>,<span class="dig">75</span>))
@@ -186,7 +221,7 @@ region_centerOfForgeViewer = Region(<span class="dig">692</span>,<span class="di
 
 <span class="kw">def</span> searchForProjectAndOpen(projectName):
     searchProjectByName(projectName)
-
+    <span class="kw">print</span> <span class="str">"LOG: Opening project: %s "</span> % projectName
     <span class="skw">click</span>(getFlair3DLogoInTheApp().targetOffset(<span class="dig">865</span>,<span class="dig">320</span>)) <span class="cmt"># Click on the projectTile</span>
     <span class="kw">print</span> <span class="str">"INFO: Going inside the project."</span>
     <span class="cmt"># Check if we are inside the project description

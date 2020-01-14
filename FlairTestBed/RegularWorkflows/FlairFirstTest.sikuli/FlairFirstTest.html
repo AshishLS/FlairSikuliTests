@@ -1,0 +1,146 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>FlairFirstTest.sikuli</h2> <a href="FlairFirstTest.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> os
+<span class="kw">import</span> sys
+sys.path.append(os.path.abspath(<span class="str">'../FlairTestBed/'</span>))
+<span class="kw">import</span> module_CommonResource
+
+ifLogin = <span class="dig">0</span>
+ifCloseChrome = <span class="dig">0</span>
+projectName = <span class="str">"Admin Building For Auto Testing"</span>
+
+<span class="kw">if</span>(ifLogin):
+    link = module_CommonResource.selectDevOrProd()
+    module_CommonResource.openChrome()
+    module_CommonResource.openFlair3DAndLogin(link)
+
+<span class="cmt"># After signing in
+</span>module_CommonResource.searchForProjectAndOpen(projectName)
+module_CommonResource.selectAllAndOpenProject()
+module_CommonResource.clickOnViewHome()
+
+<span class="kw">def</span> checkLevelsViewIsOkay():
+    <span class="kw">print</span>(<span class="str">"LOG: First Expand the All the models."</span>)
+    <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">80</span>, <span class="dig">230</span>))
+
+    <span class="kw">assert</span> exists(<img src="AdminBuildingFullView.png" />), <span class="str">"ERROR: looks Like Model is not loaded correctly"</span>
+
+    <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="AllModelsInLeftPanel.png" />), <span class="str">"ERROR: Check Left panel model names; something is wrong there."</span>
+
+    <span class="cmt"># Click On select all models
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">230</span>))
+    message = <span class="str">"ERROR: After unselecting all the levels, something is still visibile"</span>
+    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(<img src="1574152971881.png" />), message
+    <span class="kw">print</span>(<span class="str">"LOG: Make everything visible again"</span>)
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">230</span>))
+
+    <span class="cmt"># We will unselect each level one by one
+</span>    cbxLocation = Location(-<span class="dig">35</span>,<span class="dig">255</span>)  <span class="cmt"># Offset from the FlairLogo</span>
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()+<span class="dig">50</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()+<span class="dig">100</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()+<span class="dig">150</span>))
+
+
+
+    <span class="cmt"># Expand the levels as well.
+</span>    expndrLocation = Location(-<span class="dig">60</span>,<span class="dig">265</span>)  <span class="cmt"># Offset from the FlairLogo</span>
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(expndrLocation.getX(),expndrLocation.getY()))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(expndrLocation.getX(),expndrLocation.getY()+<span class="dig">310</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(expndrLocation.getX(),expndrLocation.getY()+<span class="dig">620</span>))
+    <span class="kw">assert</span> <span class="kw">not</span> exists(<img src="AdminBuildingFullView.png" />, <span class="dig">1</span>), <span class="str">"ERROR: After unselecting all models, the terminal is still visible."</span>
+    <span class="kw">print</span> <span class="str">"LOG: Click On select Arch model"</span>
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()))
+    <span class="kw">print</span> cbxLocation
+    <span class="kw">assert</span> exists(<img src="1576082292029.png" />, <span class="dig">2</span>), <span class="str">"ERROR: After selecting only Arch model, something went wrong."</span>
+    <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="AllLevelsInArchModel.png" />), <span class="str">"ERROR: Arch model selected, but it problem with all the level count. Check."</span>
+    <span class="cmt"># Click On select Arch models to make it all invisible.
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()))
+    <span class="cmt"># Click on 3rd level and see if we have proper output
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX()+<span class="dig">25</span>, cbxLocation.getY()+<span class="dig">170</span>))
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(Pattern(<img src="ArchLevel3.png" />).similar(<span class="dig">0.80</span>)), <span class="str">"ERROR: 3rd Level was selected but not an expected result"</span>
+    <span class="cmt"># Click on Level 1 of Structure model and check if the output is correct.
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX()+<span class="dig">25</span>,cbxLocation.getY()+<span class="dig">435</span>))
+    message = <span class="str">"ERROR: 3rd Level of Arch and Level 1 of Structure were selected but not an expected result"</span>
+    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(Pattern(<img src="1576081933516.png" />).similar(<span class="dig">0.80</span>), <span class="dig">2</span>), message
+    Debug.log(<span class="str">"INFO: Looks like levels are fine."</span>)
+
+checkLevelsViewIsOkay()
+
+<span class="kw">if</span>(ifCloseChrome):
+    module_CommonResource.closeChrome()
+Debug.log(<span class="str">"TEST PASSED!!"</span>)
+</pre>
+</body>
+</html>
