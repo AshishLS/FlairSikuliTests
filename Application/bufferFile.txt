@@ -1,41 +1,23 @@
-Running D:\GetTech\FlairSikuliTests\FlairTestBed\RegularWorkflows\FlairFirstTest.sikuli
+Running D:\GetTech\FlairSikuliTests\FlairTestBed\NewUserCases\C2_DeleteGivenUser.sikuli
 +++ running this Java
 +++ trying to run SikuliX
-+++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\FlairSikuliTests\Sikuli Build\sikulix.jar -r "D:\GetTech\FlairSikuliTests\FlairTestBed\RegularWorkflows\FlairFirstTest.sikuli"
-LOG: Searching for project: Admin Building For Auto Testing 
-[log] CLICK on L(92,103)@S(0)[0,0 1920x1080]
-[log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
-[log] CLICK on L(392,177)@S(0)[0,0 1920x1080]
-[log]  TYPE "Admin Building For Auto Testing"
-LOG: Opening project: Admin Building For Auto Testing 
-[log] CLICK on L(957,422)@S(0)[0,0 1920x1080]
-INFO: Going inside the project.
-INFO: Project view success.
-[log] CLICK on L(372,440)@S(0)[0,0 1920x1080]
-[log] CLICK on L(607,492)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1864,160)@S(0)[0,0 1920x1080]
-[debug] INFO: Models should be ready for search now.
-[log] CLICK on L(1769,157)@S(0)[0,0 1920x1080]
-LOG: First Expand the All the models.
-[log] CLICK on L(12,332)@S(0)[0,0 1920x1080]
-[log] CLICK on L(32,332)@S(0)[0,0 1920x1080]
-LOG: Make everything visible again
-[log] CLICK on L(32,332)@S(0)[0,0 1920x1080]
-[log] CLICK on L(57,357)@S(0)[0,0 1920x1080]
-[log] CLICK on L(57,407)@S(0)[0,0 1920x1080]
-[log] CLICK on L(57,457)@S(0)[0,0 1920x1080]
-[log] CLICK on L(57,507)@S(0)[0,0 1920x1080]
-[log] CLICK on L(32,367)@S(0)[0,0 1920x1080]
-[log] CLICK on L(32,677)@S(0)[0,0 1920x1080]
-[log] CLICK on L(32,987)@S(0)[0,0 1920x1080]
-LOG: Click On select Arch model
-[log] CLICK on L(57,357)@S(0)[0,0 1920x1080]
-[error] Location: outside any screen (-35, 255) - subsequent actions might not work as expected
-L(-35,255)
-[log] CLICK on L(57,357)@S(0)[0,0 1920x1080]
-[log] CLICK on L(82,527)@S(0)[0,0 1920x1080]
-[log] CLICK on L(82,792)@S(0)[0,0 1920x1080]
-[debug] INFO: Looks like levels are fine.
++++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\FlairSikuliTests\Sikuli Build\sikulix.jar -r "D:\GetTech\FlairSikuliTests\FlairTestBed\NewUserCases\C2_DeleteGivenUser.sikuli"
+importing module from D:\GetTech\FlairSikuliTests\FlairTestBed\module_CommonResource.sikuli
+LOG: Find and delete the user. Click on the User Management icon
+[log] CLICK on L(1729,102)@S(0)[0,0 1920x1080]
+LOG: Searching for the user:  ashish.shete108@gmail.com
+[log] CLICK on L(1032,172)@S(0)[0,0 1920x1080]
+[log]  TYPE "ashish.shete108@gmail.com"
+LOG: Select the result checkbox
+[log] CLICK on L(362,242)@S(0)[0,0 1920x1080]
+LOG: Click on the delete button
+[log] CLICK on L(1402,172)@S(0)[0,0 1920x1080]
+LOG: Delete user confirmation dialog should appear
+LOG: Click on delete in the dialog box
+[log] CLICK on L(1104,640)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1824,102)@S(0)[0,0 1920x1080]
+[log] CLICK on L(1804,232)@S(0)[0,0 1920x1080]
+[log] CLICK on L(910,620)@S(0)[0,0 1920x1080]
 [debug] TEST PASSED!!
 ++++++++++++++++++++++++++++++++ 
 

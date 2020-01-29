@@ -98,7 +98,7 @@ def openFlair3DAndLoginForGivenUser(link, username, pwd):
     type(Key.ENTER)
     if exists(getFlair3DLogoInTheApp(), 3):
         logoutFromExistingAccount()
-    assert exists("FlairLoginScreen.png", 4), "ERROR: Login screen is not visible"
+    assert exists("FlairLoginScreen.png", 10), "ERROR: Login screen is not visible"
     click(Pattern("FlairLoginScreen.png").targetOffset(-150,50))
     wait(0.5)
     removePreExistingText()
@@ -162,16 +162,22 @@ def searchForProjectAndOpen(projectName):
         return 0
 
 def selectAllAndOpenProject():
+    print "LOG: Click on Select All Checkbox - common_module"
     click(getFlair3DLogoInTheApp().targetOffset(280,338)) # Click on Select All Checkbox
+    print "LOG: Click on a file to open the project - common_module"
     click(getFlair3DLogoInTheApp().targetOffset(515,390)) # Click on a file to open the project
+    print "LOG: Wait for the AEC data load completion - common_module"
     wait("modelsAreReadyMessage.png", 30) # wait for the AEC data load completion
+    print "LOG: Click on close of AEC load completion notification - common_module"
     click(Pattern("modelsAreReadyMessage.png").targetOffset(90,0))
     Debug.log("INFO: Models should be ready for search now.")
 
 def clickOnViewHome():
-    click(Pattern("FlairWindowControls.png").targetOffset(-35,55)) # Click on the forge view button
+    print "LOG: Click on the forge view button - common_module"
+    click(Pattern("FlairWindowControls.png").targetOffset(-65,65)) 
     wait(0.5) # Wait a moment for it to settle.
 def closeThePopupMessages():
     wait(0.5)
+    print "LOG: Click on the forge view button - common_module"
     click(Pattern("FlairWindowControls.png").targetOffset(60,60)) # Click on the forge view button
     wait(0.5)

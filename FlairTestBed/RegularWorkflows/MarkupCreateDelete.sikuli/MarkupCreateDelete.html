@@ -90,14 +90,16 @@ module_CommonResource.selectAllAndOpenProject()
 module_CommonResource.clickOnViewHome()
 
 <span class="kw">def</span> checkMarkupWorkflow():
-    <span class="cmt"># Markup Creation
-</span>    bottomToolBarFirstSection = Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
-    <span class="cmt"># doubleClick on roof to zoom to it
-</span>    <span class="skw">doubleClick</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">80</span>,-<span class="dig">330</span>))
-    <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(-<span class="dig">430</span>,<span class="dig">10</span>)) <span class="cmt"># click outside to unselect</span>
-    <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">530</span>,<span class="dig">0</span>)) <span class="cmt"># click on markup button</span>
-    <span class="cmt"># Check if the markup window opens up
-</span>    <span class="kw">assert</span> exists(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markup dialog isn't visible."</span>
+    <span class="kw">print</span> <span class="str">"LOG: Start Markup Creation"</span>
+    bottomToolBarFirstSection = Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)
+    <span class="kw">print</span> <span class="str">"LOG: doubleClick on roof to zoom to it"</span>
+    <span class="skw">doubleClick</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">140</span>,-<span class="dig">320</span>))
+    <span class="kw">print</span> <span class="str">"LOG: Click outside to unselect"</span>
+    <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(-<span class="dig">430</span>,<span class="dig">10</span>))
+    <span class="kw">print</span> <span class="str">"LOG:  # click on markup button"</span>
+    <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">530</span>,<span class="dig">0</span>))
+    <span class="kw">print</span> <span class="str">"LOG: Check if the markup window opens up"</span>
+    <span class="kw">assert</span> exists(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markup dialog isn't visible."</span>
 
 
     dropdownPosition = <span class="skw">find</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">55</span>,-<span class="dig">85</span>)).getTarget()
@@ -135,17 +137,17 @@ module_CommonResource.clickOnViewHome()
     <span class="skw">wait</span>(<span class="dig">0.5</span>)
 
     <span class="cmt"># new markup a circle perhaps.
-</span>    <span class="kw">print</span> (<span class="str">"LOG: Start with the Circle Markup now"</span>)
-    <span class="cmt"># doubleClick on mid section to zoom to it
-</span>    <span class="skw">doubleClick</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">285</span>,-<span class="dig">455</span>))
+</span>    <span class="kw">print</span> <span class="str">"LOG: Start with the Circle Markup now"</span>
+    <span class="kw">print</span> <span class="str">"LOG: doubleClick on second Panel of the top row of sunroof"</span>
+    <span class="skw">doubleClick</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">285</span>,-<span class="dig">515</span>))
     <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(-<span class="dig">140</span>,-<span class="dig">70</span>)) <span class="cmt"># click outside to unselect</span>
 
     <span class="skw">click</span>(Pattern(<img src="bottomToolBarFirstSection.png" />).targetOffset(<span class="dig">530</span>,<span class="dig">0</span>)) <span class="cmt"># click on markup button</span>
-    <span class="cmt"># Check if the markup window opens up
-</span>    <span class="kw">assert</span> exists(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markup dialog isn't visible."</span>
+    <span class="kw">print</span> <span class="str">"LOG: Check if the markup window opens up"</span>
+    <span class="kw">assert</span> exists(Pattern(<img src="markupViewDialog.png" />).targetOffset(<span class="dig">1</span>,<span class="dig">0</span>)), <span class="str">"ERROR: Markup dialog isn't visible."</span>
 
-    <span class="cmt"># Enable the edit mode.
-</span>    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(-<span class="dig">85</span>,-<span class="dig">85</span>))
+    <span class="kw">print</span> <span class="str">"LOG: Enable the edit mode."</span>
+    <span class="skw">click</span>(Pattern(<img src="markupViewDialog.png" />).targetOffset(-<span class="dig">85</span>,-<span class="dig">85</span>))
     <span class="cmt"># Select new markup
 </span>    <span class="skw">click</span>(dropdownPosition)
     <span class="cmt"># Select circle markup
@@ -157,8 +159,8 @@ module_CommonResource.clickOnViewHome()
     <span class="skw">dragDrop</span>(drawLocation, Location(drawLocation.getX() + <span class="dig">200</span>, drawLocation.getY() + <span class="dig">200</span>))
     <span class="skw">dragDrop</span>(drawLocation, Location(drawLocation.getX() + <span class="dig">100</span>, drawLocation.getY() + <span class="dig">100</span>)) <span class="cmt"># draw two so that we can easily identify</span>
 
-    <span class="cmt"># add a markup name and save
-</span>
+    <span class="kw">print</span> <span class="str">"LG: add a markup name and save the circle markup"</span>
+
     <span class="skw">click</span>(markUpNameTextBoxPosition) <span class="cmt"># editable textbox</span>
     <span class="kw">assert</span> exists(<img src="CircleMarkups.png" />), <span class="str">"ERROR: Circle markup messed while drawing"</span>
     paste(<span class="str">"Roof Panel Position"</span>)
@@ -174,7 +176,7 @@ module_CommonResource.clickOnViewHome()
         <span class="kw">assert</span> exists(Pattern(<img src="TwoMarkupEntries.png" />).targetOffset(<span class="dig">0</span>,<span class="dig">1</span>)), <span class="str">"ERROR: Markups are not shown in the UI"</span>
         <span class="cmt"># click on 1st markup and check if the view shows it appropriately
 </span>        <span class="skw">click</span>(Pattern(<img src="TwoMarkupEntries.png" />).targetOffset(-<span class="dig">85</span>,-<span class="dig">20</span>)) <span class="cmt"># select 1st cloud markup</span>
-        <span class="kw">assert</span> exists((<img src="CloudMarkup.png" />)), <span class="str">"ERROR: Something wrong with the 1st cloud Markup"</span>
+        <span class="kw">assert</span> exists((Pattern(<img src="CloudMarkup.png" />).similar(<span class="dig">0.80</span>))), <span class="str">"ERROR: Something wrong with the 1st cloud Markup"</span>
         <span class="skw">click</span>(Pattern(<img src="TwoMarkupEntries.png" />).targetOffset(-<span class="dig">85</span>,<span class="dig">20</span>)) <span class="cmt"># select second markup</span>
         <span class="kw">assert</span> exists(<img src="CircleMarkups.png" />), <span class="str">"ERROR: Something wrong with the 1st Markup"</span>
 
@@ -207,8 +209,9 @@ module_CommonResource.clickOnViewHome()
     <span class="cmt"># Prepare to close.
 </span>    <span class="skw">click</span>(closeButtonPosition) <span class="cmt"># close markup</span>
 
+<span class="kw">print</span> <span class="str">"LOG: First expand the models"</span>
 <span class="cmt"># First expand the models."1577200523998.png"
-</span><span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">80</span>, <span class="dig">230</span>))
+</span><span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">80</span>, <span class="dig">172</span>))
 <span class="skw">wait</span>(<span class="dig">0.5</span>)
 checkMarkupWorkflow()
 

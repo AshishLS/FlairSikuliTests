@@ -91,49 +91,47 @@ module_CommonResource.clickOnViewHome()
 
 <span class="kw">def</span> checkLevelsViewIsOkay():
     <span class="kw">print</span>(<span class="str">"LOG: First Expand the All the models."</span>)
-    <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">80</span>, <span class="dig">230</span>))
+    <span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">80</span>, <span class="dig">170</span>))
 
     <span class="kw">assert</span> exists(<img src="AdminBuildingFullView.png" />), <span class="str">"ERROR: looks Like Model is not loaded correctly"</span>
 
     <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="AllModelsInLeftPanel.png" />), <span class="str">"ERROR: Check Left panel model names; something is wrong there."</span>
 
-    <span class="cmt"># Click On select all models
-</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">230</span>))
+    <span class="kw">print</span> <span class="str">"LOG: Click On select all models"</span>
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">55</span>,<span class="dig">170</span>))
     message = <span class="str">"ERROR: After unselecting all the levels, something is still visibile"</span>
     <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(<img src="1574152971881.png" />), message
     <span class="kw">print</span>(<span class="str">"LOG: Make everything visible again"</span>)
-    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">60</span>,<span class="dig">230</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">55</span>,<span class="dig">170</span>))
 
     <span class="cmt"># We will unselect each level one by one
-</span>    cbxLocation = Location(-<span class="dig">35</span>,<span class="dig">255</span>)  <span class="cmt"># Offset from the FlairLogo</span>
+</span>    cbxLocation = Location(-<span class="dig">35</span>,<span class="dig">195</span>)  <span class="cmt"># Offset from the FlairLogo</span>
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()))
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()+<span class="dig">50</span>))
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()+<span class="dig">100</span>))
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()+<span class="dig">150</span>))
 
-
-
     <span class="cmt"># Expand the levels as well.
-</span>    expndrLocation = Location(-<span class="dig">60</span>,<span class="dig">265</span>)  <span class="cmt"># Offset from the FlairLogo</span>
+</span>    expndrLocation = Location(-<span class="dig">55</span>,<span class="dig">205</span>)  <span class="cmt"># Offset from the FlairLogo</span>
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(expndrLocation.getX(),expndrLocation.getY()))
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(expndrLocation.getX(),expndrLocation.getY()+<span class="dig">310</span>))
-    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(expndrLocation.getX(),expndrLocation.getY()+<span class="dig">620</span>))
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(expndrLocation.getX(),expndrLocation.getY()+<span class="dig">455</span>))
     <span class="kw">assert</span> <span class="kw">not</span> exists(<img src="AdminBuildingFullView.png" />, <span class="dig">1</span>), <span class="str">"ERROR: After unselecting all models, the terminal is still visible."</span>
     <span class="kw">print</span> <span class="str">"LOG: Click On select Arch model"</span>
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()))
     <span class="kw">print</span> cbxLocation
-    <span class="kw">assert</span> exists(<img src="1576082292029.png" />, <span class="dig">2</span>), <span class="str">"ERROR: After selecting only Arch model, something went wrong."</span>
+    <span class="kw">assert</span> exists(<img src="OnlyArchVisible.png" />, <span class="dig">2</span>), <span class="str">"ERROR: After selecting only Arch model, something went wrong."</span>
     <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="AllLevelsInArchModel.png" />), <span class="str">"ERROR: Arch model selected, but it problem with all the level count. Check."</span>
     <span class="cmt"># Click On select Arch models to make it all invisible.
 </span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX(),cbxLocation.getY()))
     <span class="cmt"># Click on 3rd level and see if we have proper output
 </span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX()+<span class="dig">25</span>, cbxLocation.getY()+<span class="dig">170</span>))
     <span class="skw">wait</span>(<span class="dig">1</span>)
-    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(Pattern(<img src="ArchLevel3.png" />).similar(<span class="dig">0.80</span>)), <span class="str">"ERROR: 3rd Level was selected but not an expected result"</span>
+    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(<img src="ArchLevel3.png" />), <span class="str">"ERROR: 3rd Level was selected but not an expected result"</span>
     <span class="cmt"># Click on Level 1 of Structure model and check if the output is correct.
-</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX()+<span class="dig">25</span>,cbxLocation.getY()+<span class="dig">435</span>))
+</span>    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(cbxLocation.getX()+<span class="dig">25</span>,cbxLocation.getY()+<span class="dig">570</span>))
     message = <span class="str">"ERROR: 3rd Level of Arch and Level 1 of Structure were selected but not an expected result"</span>
-    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(Pattern(<img src="1576081933516.png" />).similar(<span class="dig">0.80</span>), <span class="dig">2</span>), message
+    <span class="kw">assert</span> module_CommonResource.region_centerOfForgeViewer.exists(<img src="Arch3rdLevel1stStructLevel.png" />, <span class="dig">2</span>), message
     Debug.log(<span class="str">"INFO: Looks like levels are fine."</span>)
 
 checkLevelsViewIsOkay()

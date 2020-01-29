@@ -92,23 +92,23 @@ module_CommonResource.clickOnViewHome()
 <span class="kw">def</span> check2DViewsAreOkay():
 
     <span class="kw">assert</span> exists(<img src="AdminBuildingFullView.png" />), <span class="str">"ERROR: looks Like Model is not loaded correctly"</span>
-    <span class="kw">print</span> (<span class="str">"LOG: Click on the show 2D view radio button"</span>)
+    <span class="kw">print</span> (<span class="str">"LOG: Click on the show 2D view slider button"</span>)
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">65</span>,<span class="dig">135</span>))
     <span class="kw">print</span> (<span class="str">"LOG: Check if the first sheet looks okay."</span>)
     <span class="kw">assert</span> exists(<img src="FirstSheetBottom.png" />), <span class="str">"ERROR: 1st sheet doesn't look okay"</span>
     <span class="kw">print</span> (<span class="str">"LOG: 2D Sheets should show up in the left panel"</span>)
     <span class="kw">assert</span> module_CommonResource.region_leftPanel.exists(<img src="SheetList.png" />), <span class="str">"ERROR: 2D sheets list not visible"</span>
 
-    rdoButton1st2DsheetLocation = Location(-<span class="dig">40</span>,<span class="dig">370</span>) <span class="cmt"># Offset from the FlairLogo</span>
+    rdoButton1st2DsheetLocation = Location(-<span class="dig">40</span>,<span class="dig">310</span>) <span class="cmt"># Offset from the FlairLogo</span>
     <span class="kw">print</span> (<span class="str">"LOG: Check if the 2nd Sheet of 1st Model (ARCH) is okay"</span>)
     module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(rdoButton1st2DsheetLocation.getX(),rdoButton1st2DsheetLocation.getY()+<span class="dig">45</span>))
-    <span class="kw">assert</span> exists(<img src="FourtSheetRightTop.png" />, <span class="dig">5</span>), <span class="str">"ERROR: 2nd sheet doesn't look okay"</span>
+    <span class="kw">assert</span> exists(<img src="FourtSheetRightTop.png" />, <span class="dig">5</span>), <span class="str">"ERROR: 2nd sheet of 1st Model (ARCH) doesn't look okay"</span>
 
     <span class="kw">print</span> (<span class="str">"LOG: Check if the 1st sheet in second model (STR) is okay. Click on the expand button"</span>)
-    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">230</span>,<span class="dig">510</span>))
-    <span class="kw">print</span> (<span class="str">"LOG: click on the 000- Cover model"</span>)
-    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">40</span>,<span class="dig">460</span>))
-    <span class="kw">assert</span> exists(<img src="FirstSheetBottom.png" />), <span class="str">"ERROR: 2nd sheet doesn't look okay"</span>
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(<span class="dig">230</span>,<span class="dig">450</span>))
+    <span class="kw">print</span> (<span class="str">"LOG: click on the 000- Cover sheet of STR model"</span>)
+    module_CommonResource.region_leftPanel.<span class="skw">click</span>(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(-<span class="dig">40</span>,<span class="dig">400</span>))
+    <span class="kw">assert</span> exists(<img src="FirstSheetBottom.png" />), <span class="str">"ERROR: 2nd sheet of 2nd Model (STR) doesn't look okay"</span>
 
     Debug.log(<span class="str">"INFO: Looks like 2D Sheets are fine."</span>)
 
