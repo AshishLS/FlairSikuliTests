@@ -1,23 +1,7 @@
-Running D:\GetTech\FlairSikuliTests\FlairTestBed\NewUserCases\C2_DeleteGivenUser.sikuli
+Running D:\GetTech\FlairSikuliTests\FlairTestBed\RegularWorkflows\ZZZFlairCloseApp.sikuli
 +++ running this Java
 +++ trying to run SikuliX
-+++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\FlairSikuliTests\Sikuli Build\sikulix.jar -r "D:\GetTech\FlairSikuliTests\FlairTestBed\NewUserCases\C2_DeleteGivenUser.sikuli"
-importing module from D:\GetTech\FlairSikuliTests\FlairTestBed\module_CommonResource.sikuli
-LOG: Find and delete the user. Click on the User Management icon
-[log] CLICK on L(1729,102)@S(0)[0,0 1920x1080]
-LOG: Searching for the user:  ashish.shete108@gmail.com
-[log] CLICK on L(1032,172)@S(0)[0,0 1920x1080]
-[log]  TYPE "ashish.shete108@gmail.com"
-LOG: Select the result checkbox
-[log] CLICK on L(362,242)@S(0)[0,0 1920x1080]
-LOG: Click on the delete button
-[log] CLICK on L(1402,172)@S(0)[0,0 1920x1080]
-LOG: Delete user confirmation dialog should appear
-LOG: Click on delete in the dialog box
-[log] CLICK on L(1104,640)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1824,102)@S(0)[0,0 1920x1080]
-[log] CLICK on L(1804,232)@S(0)[0,0 1920x1080]
-[log] CLICK on L(910,620)@S(0)[0,0 1920x1080]
++++ using: -Xms64M -Xmx512M -Dfile.encoding=UTF-8 -Dsikuli.FromCommandLine -jar D:\GetTech\FlairSikuliTests\Sikuli Build\sikulix.jar -r "D:\GetTech\FlairSikuliTests\FlairTestBed\RegularWorkflows\ZZZFlairCloseApp.sikuli"
 [debug] TEST PASSED!!
 ++++++++++++++++++++++++++++++++ 
 

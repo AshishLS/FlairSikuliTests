@@ -40,7 +40,7 @@ def checkSearchByComponentName():
         click(module_CommonResource.getFlair3DLogoInTheApp().targetOffset(135,425)) # Click on Fit To view checkBox
     
     print "LOG: Click on the second result - Basic Roof [615290]"
-    click(Pattern("BasicRoofSearchResult.png").targetOffset(-30,35))
+    click(Pattern("BasicRoofSearchResult.png").targetOffset(-70,65))
 
     assert exists("BasicRoofSearchObjectFit.png", 2), "ERROR: Incorrect Search result or Fit To View didn't work"
     
